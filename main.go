@@ -15,11 +15,13 @@ func main() {
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// Log request details
 		log.Printf(
-			"[%s] %s %s from %s",
+			"[%s] %s %s %s from %s (User-Agent: %s)",
 			time.Now().Format(time.RFC3339),
 			r.Method,
 			r.URL.Path,
+			r.Proto,
 			r.RemoteAddr,
+			r.UserAgent(),
 		)
 
 		// Simple response
