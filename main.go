@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/a-h/templ"
 	"github.com/go-chi/chi/v5"
 )
 
