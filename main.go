@@ -10,8 +10,8 @@ import (
 )
 
 func main() {
-	// Create a new ServeMux to handle requests
-	mux := http.NewServeMux()
+	// Create a new Chi router
+	router := chi.NewRouter()
 
 	// Define HTML template with HTMX support
 	htmlTemplate := `
@@ -162,19 +162,25 @@ func main() {
 	// Parse the template
 	tmpl := template.Must(template.New("index").Parse(htmlTemplate))
 
-	// Handle all requests with a logging middleware
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Log request details
-		log.Printf(
-			"[%s] %s %s %s from %s (User-Agent: %s)",
-			time.Now().Format(time.RFC3339),
-			r.Method,
-			r.URL.Path,
-			r.Proto,
-			r.RemoteAddr,
-			r.UserAgent(),
-		)
+	// Middleware to log requests
+	router.Use(func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// Log request details
+			log.Printf(
+				"[%s] %s %s %s from %s (User-Agent: %s)",
+				time.Now().Format(time.RFC3339),
+				r.Method,
+				r.URL.Path,
+				r.Proto,
+				r.RemoteAddr,
+				r.UserAgent(),
+			)
+			next.ServeHTTP(w, r)
+		})
+	})
 
+	// Handle root route
+	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		// Prepare data for template
 		data := map[string]interface{}{
 			"Timestamp":      time.Now().Format(time.RFC3339),
@@ -194,7 +200,7 @@ func main() {
 	})
 
 	// Handle experience section
-	mux.HandleFunc("/cv/experience", func(w http.ResponseWriter, r *http.Request) {
+	router.Get("/cv/experience", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
 		experienceHTML := `
         <div class="experience-item">
@@ -220,7 +226,7 @@ func main() {
 	})
 
 	// Handle education section
-	mux.HandleFunc("/cv/education", func(w http.ResponseWriter, r *http.Request) {
+	router.Get("/cv/education", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
 		educationHTML := `
         <div class="education-item">
@@ -240,7 +246,7 @@ func main() {
 	// Create server
 	server := &http.Server{
 		Addr:    ":33333",
-		Handler: mux,
+		Handler: router,
 	}
 
 	// Start server and log any errors
