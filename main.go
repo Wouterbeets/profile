@@ -63,7 +63,7 @@ func main() {
             Path: {{.Path}}<br>
             Protocol: {{.Proto}}<br>
             Remote Address: {{.RemoteAddr}}<br>
-            User Agent: {{.UserAgent}}
+            User Agent: {{.EscapedUserAgent}}
         </div>
         
         <p>Request received and logged successfully!</p>
@@ -90,12 +90,13 @@ func main() {
 
 		// Prepare data for template
 		data := map[string]interface{}{
-			"Timestamp": time.Now().Format(time.RFC3339),
-			"Method":    r.Method,
-			"Path":      r.URL.Path,
-			"Proto":     r.Proto,
-			"RemoteAddr": r.RemoteAddr,
-			"UserAgent": r.UserAgent(),
+			"Timestamp":      time.Now().Format(time.RFC3339),
+			"Method":         r.Method,
+			"Path":           r.URL.Path,
+			"Proto":          r.Proto,
+			"RemoteAddr":     r.RemoteAddr,
+			"UserAgent":      r.UserAgent(),
+			"EscapedUserAgent": template.HTMLEscapeString(r.UserAgent()),
 		}
 
 		// Execute template
