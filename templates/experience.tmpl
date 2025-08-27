@@ -1,0 +1,12 @@
+{{range .ExperienceItems}}
+<div class="experience-item">
+    <h3>{{.Title}}</h3>
+    <span class="company">{{.Company}}</span>
+    <span class="period">{{.Period}}</span>
+    <ul>
+        {{range .Description}}
+        <li>{{.}}</li>
+        {{end}}
+    </ul>
+</div>
+{{end}}
