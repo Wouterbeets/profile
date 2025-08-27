@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-chi/chi/v5"
 	"embed"
+	"github.com/go-chi/chi/v5"
 	"io/fs"
 	"text/template"
 )
@@ -52,15 +52,15 @@ func main() {
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		// Prepare data for template
 		data := map[string]interface{}{
-			"Timestamp":      time.Now().Format(time.RFC3339),
-			"Method":         r.Method,
-			"Path":           r.URL.Path,
-			"Proto":          r.Proto,
-			"RemoteAddr":     r.RemoteAddr,
-			"UserAgent":      r.UserAgent(),
+			"Timestamp":        time.Now().Format(time.RFC3339),
+			"Method":           r.Method,
+			"Path":             r.URL.Path,
+			"Proto":            r.Proto,
+			"RemoteAddr":       r.RemoteAddr,
+			"UserAgent":        r.UserAgent(),
 			"EscapedUserAgent": template.HTMLEscapeString(r.UserAgent()),
 			"Skills": []string{
-				"Go Programming", "Python", "C", "React", 
+				"Go Programming", "Python", "C", "React",
 				"Microservices Architecture", "Cloud Technologies",
 				"DevOps Practices", "Database Design", "System Design",
 				"Leadership", "Team Management", "Technical Vision",
@@ -80,9 +80,9 @@ func main() {
 		experienceData := map[string]interface{}{
 			"ExperienceItems": []map[string]interface{}{
 				{
-					"Title": "CTO",
+					"Title":   "CTO",
 					"Company": "La Clinique E-Santé",
-					"Period": "February 2023 - January 2025, Paris, France",
+					"Period":  "February 2023 - January 2025, Paris, France",
 					"Description": []string{
 						"Led the technical vision and architecture for an online mental health therapy platform offering 24/7 access via message, audio, and video",
 						"Oversaw development and maintenance of mobile and web applications, ensuring secure, reimbursable consultations and seamless patient-psychologist communication",
@@ -91,43 +91,43 @@ func main() {
 					},
 				},
 				{
-					"Title": "Payment Platform Staff Engineer",
+					"Title":   "Payment Platform Staff Engineer",
 					"Company": "leboncoin",
-					"Period": "2022 - January 2023, Paris, France",
+					"Period":  "2022 - January 2023, Paris, France",
 					"Description": []string{
 						"Defined the technical architecture vision for 4 teams",
 					},
 				},
 				{
-					"Title": "Lead Developer",
+					"Title":   "Lead Developer",
 					"Company": "leboncoin",
-					"Period": "2019 - 2022, Paris, France",
+					"Period":  "2019 - 2022, Paris, France",
 					"Description": []string{
 						"Provided organizational and technical support to 100 developers",
 					},
 				},
 				{
-					"Title": "Backend Developer",
+					"Title":   "Backend Developer",
 					"Company": "leboncoin",
-					"Period": "2017 - 2019, Paris, France",
+					"Period":  "2017 - 2019, Paris, France",
 					"Description": []string{
 						"Migrated the legacy codebase to a microservices architecture",
 						"Integrated new payment service providers",
 					},
 				},
 				{
-					"Title": "Fullstack Developer",
+					"Title":   "Fullstack Developer",
 					"Company": "Artefact",
-					"Period": "2015 - 2017, Paris, France",
+					"Period":  "2015 - 2017, Paris, France",
 					"Description": []string{
 						"Managed a big data analytics tool",
 						"Served as Scrum Master for the product team",
 					},
 				},
 				{
-					"Title": "Home Cooking Service Entrepreneur",
+					"Title":   "Home Cooking Service Entrepreneur",
 					"Company": "Thuis aan Tafel - Netherlands",
-					"Period": "2012 - 2015, Netherlands",
+					"Period":  "2012 - 2015, Netherlands",
 					"Description": []string{
 						"Created and maintained a software solution using MS ACCESS",
 						"Managed accounting and financial responsibility",
@@ -148,24 +148,24 @@ func main() {
 		educationData := map[string]interface{}{
 			"EducationItems": []map[string]interface{}{
 				{
-					"Title": "Grande École Numérique",
+					"Title":       "Grande École Numérique",
 					"Institution": "École 42",
-					"Period": "September 2013 - 2016, RNCP Level 1",
+					"Period":      "September 2013 - 2016, RNCP Level 1",
 				},
 				{
-					"Title": "Communication and Multimedia Design",
+					"Title":       "Communication and Multimedia Design",
 					"Institution": "Hogeschool van Amsterdam",
-					"Period": "September 2007 - 2008",
+					"Period":      "September 2007 - 2008",
 				},
 				{
-					"Title": "Engineering, Design and Innovation",
+					"Title":       "Engineering, Design and Innovation",
 					"Institution": "Hogeschool van Amsterdam",
-					"Period": "September 2006 - 2007",
+					"Period":      "September 2006 - 2007",
 				},
 				{
-					"Title": "Hoger Algemeen Voortgezet Onderwijs",
+					"Title":       "Hoger Algemeen Voortgezet Onderwijs",
 					"Institution": "Equivalent to high school diploma",
-					"Period": "September 2001 - 2006",
+					"Period":      "September 2001 - 2006",
 				},
 			},
 		}
