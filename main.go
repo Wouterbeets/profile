@@ -9,6 +9,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"io/fs"
 	"text/template"
+	"html/template"
 )
 
 //go:embed templates
