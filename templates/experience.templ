@@ -1,0 +1,33 @@
+package templates
+
+import (
+	"context"
+	"html/template"
+)
+
+func ExperienceTemplate(data map[string]interface{}) template.HTML {
+	return template.HTML(`
+` + func() template.HTML {
+		var experienceHTML template.HTML
+		for _, item := range data["ExperienceItems"].([]map[string]interface{}) {
+			experienceHTML += template.HTML(`
+<div class="experience-item">
+    <h3>` + item["Title"].(string) + `</h3>
+    <span class="company">` + item["Company"].(string) + `</span>
+    <span class="period">` + item["Period"].(string) + `</span>
+    <ul>
+` + func() template.HTML {
+				var descHTML template.HTML
+				for _, desc := range item["Description"].([]string) {
+					descHTML += template.HTML(`<li>` + desc + `</li>`)
+				}
+				return descHTML
+			}() + `
+    </ul>
+</div>
+`)
+		}
+		return experienceHTML
+	}() + `
+`)
+}

@@ -5,31 +5,12 @@ import (
 	"net/http"
 	"time"
 
-	"embed"
 	"github.com/go-chi/chi/v5"
-	"html/template"
-	"io/fs"
 )
-
-//go:embed templates
-var embeddedFiles embed.FS
 
 func main() {
 	// Create a new Chi router
 	router := chi.NewRouter()
-
-	// Setup template parsing with Templ
-	tmplFS, err := fs.Sub(embeddedFiles, "templates")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Parse templates
-	tmpl := template.Must(template.New("").Funcs(template.FuncMap{
-		"safeHTML": func(s string) template.HTML {
-			return template.HTML(s)
-		},
-	}).ParseFS(tmplFS, "*.tmpl"))
 
 	// Middleware to log requests
 	router.Use(func(next http.Handler) http.Handler {
@@ -58,7 +39,7 @@ func main() {
 			"Proto":            r.Proto,
 			"RemoteAddr":       r.RemoteAddr,
 			"UserAgent":        r.UserAgent(),
-			"EscapedUserAgent": template.HTMLEscapeString(r.UserAgent()),
+			"EscapedUserAgent": r.UserAgent(), // Templ handles escaping automatically
 			"Skills": []string{
 				"Go Programming", "Python", "C", "React",
 				"Microservices Architecture", "Cloud Technologies",
@@ -68,10 +49,7 @@ func main() {
 		}
 
 		// Execute template
-		if err := tmpl.ExecuteTemplate(w, "index.tmpl", data); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		IndexTemplate(data).Render(r.Context(), w)
 	})
 
 	// Handle experience section
@@ -136,10 +114,7 @@ func main() {
 			},
 		}
 
-		if err := tmpl.ExecuteTemplate(w, "experience.tmpl", experienceData); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		ExperienceTemplate(experienceData).Render(r.Context(), w)
 	})
 
 	// Handle education section
@@ -170,10 +145,7 @@ func main() {
 			},
 		}
 
-		if err := tmpl.ExecuteTemplate(w, "education.tmpl", educationData); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		EducationTemplate(educationData).Render(r.Context(), w)
 	})
 
 	// Create server
