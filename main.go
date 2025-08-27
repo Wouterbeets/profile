@@ -307,7 +307,7 @@ func main() {
             <span class="company">leboncoin</span>
             <span class="period">2022 - January 2023, Paris, France</span>
             <ul>
-                <li>Construction de la vision architecturale technique de 4 équipes</li>
+                <li>Defined the technical architecture vision for 4 teams</li>
             </ul>
         </div>
         <div class="experience-item">
@@ -315,7 +315,7 @@ func main() {
             <span class="company">leboncoin</span>
             <span class="period">2019 - 2022, Paris, France</span>
             <ul>
-                <li>Accompagnement organisationnel et technique de 100 developers</li>
+                <li>Provided organizational and technical support to 100 developers</li>
             </ul>
         </div>
         <div class="experience-item">
@@ -323,8 +323,8 @@ func main() {
             <span class="company">leboncoin</span>
             <span class="period">2017 - 2019, Paris, France</span>
             <ul>
-                <li>Migration technique du codebase legacy vers une architecture microservices</li>
-                <li>Intégration des nouveaux payment service providers</li>
+                <li>Migrated the legacy codebase to a microservices architecture</li>
+                <li>Integrated new payment service providers</li>
             </ul>
         </div>
         <div class="experience-item">
@@ -332,17 +332,17 @@ func main() {
             <span class="company">Artefact</span>
             <span class="period">2015 - 2017, Paris, France</span>
             <ul>
-                <li>Gestion d’un outil d’analyse big data</li>
-                <li>Scrum Master de l’équipe produit</li>
+                <li>Managed a big data analytics tool</li>
+                <li>Served as Scrum Master for the product team</li>
             </ul>
         </div>
         <div class="experience-item">
-            <h3>Entrepreneur service à domicile en restauration</h3>
-            <span class="company">Thuis aan Tafel - Pays-Bas</span>
-            <span class="period">2012 - 2015, Pays-Bas</span>
+            <h3>Home Cooking Service Entrepreneur</h3>
+            <span class="company">Thuis aan Tafel - Netherlands</span>
+            <span class="period">2012 - 2015, Netherlands</span>
             <ul>
-                <li>Création et mise à jour d’un logiciel sous MS ACCESS</li>
-                <li>Organisation comptable et responsable financier</li>
+                <li>Created and maintained a software solution using MS ACCESS</li>
+                <li>Managed accounting and financial responsibility</li>
             </ul>
         </div>
         `
@@ -356,7 +356,7 @@ func main() {
         <div class="education-item">
             <h3>Grande École Numérique</h3>
             <span class="institution">École 42</span>
-            <span class="period">September 2013 - 2016, RNCP Niveau 1</span>
+            <span class="period">September 2013 - 2016, RNCP Level 1</span>
         </div>
         <div class="education-item">
             <h3>Communication and Multimedia Design</h3>
@@ -370,7 +370,7 @@ func main() {
         </div>
         <div class="education-item">
             <h3>Hoger Algemeen Voortgezet Onderwijs</h3>
-            <span class="institution">Equivalent du baccalauréat</span>
+            <span class="institution">Equivalent to high school diploma</span>
             <span class="period">September 2001 - 2006</span>
         </div>
         `
