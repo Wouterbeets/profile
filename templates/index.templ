@@ -54,7 +54,7 @@ templ IndexTemplate(data map[string]interface{}) {
 				padding-bottom: 10px;
 				border-bottom: 2px solid #667eea;
 			}
-			.experience-item, .education-item {
+			.experience-item, .education-item, .project-item {
 				margin: 20px 0;
 				padding: 20px;
 				background-color: white;
@@ -63,11 +63,11 @@ templ IndexTemplate(data map[string]interface{}) {
 				border-left: 4px solid #667eea;
 				transition: transform 0.3s ease, box-shadow 0.3s ease;
 			}
-			.experience-item:hover, .education-item:hover {
+			.experience-item:hover, .education-item:hover, .project-item:hover {
 				transform: translateY(-5px);
 				box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 			}
-			.experience-item h3, .education-item h3 {
+			.experience-item h3, .education-item h3, .project-item h3 {
 				color: #2c3e50;
 				margin-top: 0;
 			}
@@ -81,6 +81,17 @@ templ IndexTemplate(data map[string]interface{}) {
 				color: #7f8c8d;
 				font-size: 0.9em;
 				margin-bottom: 10px;
+			}
+			.project-item p {
+				margin: 10px 0;
+			}
+			.project-item a {
+				color: #667eea;
+				text-decoration: none;
+				font-weight: bold;
+			}
+			.project-item a:hover {
+				text-decoration: underline;
 			}
 			.contact-info {
 				display: flex;
@@ -169,6 +180,14 @@ templ IndexTemplate(data map[string]interface{}) {
 				<div id="education-content">
 					<!-- Education will be loaded here via HTMX -->
 					<p>Loading education...</p>
+				</div>
+			</div>
+
+			<div class="section" hx-get="/cv/projects" hx-target="#projects-content" hx-trigger="load">
+				<h2>Personal Projects</h2>
+				<div id="projects-content">
+					<!-- Projects will be loaded here via HTMX -->
+					<p>Loading projects...</p>
 				</div>
 			</div>
 

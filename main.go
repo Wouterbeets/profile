@@ -142,6 +142,32 @@ func main() {
 		templates.EducationTemplate(educationData).Render(r.Context(), w)
 	})
 
+	// Handle projects section
+	router.Get("/cv/projects", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		projectsData := map[string]interface{}{
+			"ProjectItems": []map[string]interface{}{
+				{
+					"Title":       "Portfolio Website",
+					"Description": "A personal portfolio website built with Go and Templ, showcasing professional experience, education, and projects.",
+					"GitHubLink":  "https://github.com/user/portfolio",
+				},
+				{
+					"Title":       "Microservices Chat App",
+					"Description": "A real-time chat application using microservices architecture with Go, Docker, and Kubernetes.",
+					"GitHubLink":  "https://github.com/user/chat-app",
+				},
+				{
+					"Title":       "Data Analytics Tool",
+					"Description": "A tool for big data analytics built with Python and React, featuring interactive dashboards.",
+					"GitHubLink":  "https://github.com/user/analytics-tool",
+				},
+			},
+		}
+
+		templates.ProjectsTemplate(projectsData).Render(r.Context(), w)
+	})
+
 	// Create server
 	server := &http.Server{
 		Addr:    ":33333",
