@@ -1,11 +1,11 @@
 package templates
 
 templ ProjectsTemplate(data map[string]interface{}) {
-	for _, item := range data["ProjectItems"].([]map[string]interface{}) {
-		<div class="project-item">
-			<h3>{ item["Title"].(string) }</h3>
-			<p>{ item["Description"].(string) }</p>
-			<a href="{ item["GitHubLink"].(string) }" target="_blank">View on GitHub</a>
-		</div>
-	}
+    for _, item := range data["ProjectItems"].([]map[string]interface{}) {
+        <div class="project-item">
+            <h3>{ item["Title"].(string) }</h3>
+            <p>{ item["Description"].(string) }</p>
+            <a href="{ item["GitHubLink"].(string) }" target="_blank">View on GitHub</a>
+        </div>
+    }
 }
