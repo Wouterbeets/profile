@@ -34,13 +34,6 @@ func main() {
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		// Prepare data for template
 		data := map[string]interface{}{
-			"Timestamp":        time.Now().Format(time.RFC3339),
-			"Method":           r.Method,
-			"Path":             r.URL.Path,
-			"Proto":            r.Proto,
-			"RemoteAddr":       r.RemoteAddr,
-			"UserAgent":        r.UserAgent(),
-			"EscapedUserAgent": r.UserAgent(), // Templ handles escaping automatically
 			"Skills": []string{
 				"Go Programming", "Python", "C", "React",
 				"Microservices Architecture", "Cloud Technologies",

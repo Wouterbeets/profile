@@ -41,18 +41,6 @@ templ IndexTemplate(data map[string]interface{}) {
 				margin: 10px auto;
 				border-radius: 2px;
 			}
-			.request-info {
-				background-color: #e9f7fe;
-				padding: 20px;
-				border-radius: 10px;
-				margin: 25px 0;
-				font-family: monospace;
-				border-left: 5px solid #667eea;
-			}
-			.timestamp {
-				color: #666;
-				font-size: 0.9em;
-			}
 			.section {
 				margin: 30px 0;
 				padding: 25px;
@@ -163,16 +151,6 @@ templ IndexTemplate(data map[string]interface{}) {
 		<div class="container">
 			<h1>Professional Portfolio</h1>
 			
-			<div class="request-info">
-				<strong>Request Details:</strong><br>
-				<span class="timestamp">Timestamp: { data["Timestamp"].(string) }</span><br>
-				Method: { data["Method"].(string) }<br>
-				Path: { data["Path"].(string) }<br>
-				Protocol: { data["Proto"].(string) }<br>
-				Remote Address: { data["RemoteAddr"].(string) }<br>
-				User Agent: { data["EscapedUserAgent"].(string) }
-			</div>
-
 			<div class="profile-summary">
 				<p>Passionate software engineer with expertise in building scalable web applications and leading technical teams. 
 				Specialized in Go, full-stack development, and modern architecture patterns.</p>
@@ -220,8 +198,6 @@ templ IndexTemplate(data map[string]interface{}) {
 					}
 				</div>
 			</div>
-
-			<p>Request received and logged successfully!</p>
 		</div>
 	</body>
 	</html>
