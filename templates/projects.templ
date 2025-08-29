@@ -1,5 +1,3 @@
-package templates
-
 templ ProjectsTemplate(data map[string]interface{}) {
 	for _, item := range data["ProjectItems"].([]map[string]interface{}) {
 		<div class="project-item">
