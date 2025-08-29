@@ -165,12 +165,12 @@ templ IndexTemplate(data map[string]interface{}) {
 			
 			<div class="request-info">
 				<strong>Request Details:</strong><br>
-				<span class="timestamp">Timestamp: { data["Timestamp"] }</span><br>
-				Method: { data["Method"] }<br>
-				Path: { data["Path"] }<br>
-				Protocol: { data["Proto"] }<br>
-				Remote Address: { data["RemoteAddr"] }<br>
-				User Agent: { data["EscapedUserAgent"] }
+				<span class="timestamp">Timestamp: { data["Timestamp"].(string) }</span><br>
+				Method: { data["Method"].(string) }<br>
+				Path: { data["Path"].(string) }<br>
+				Protocol: { data["Proto"].(string) }<br>
+				Remote Address: { data["RemoteAddr"].(string) }<br>
+				User Agent: { data["EscapedUserAgent"].(string) }
 			</div>
 
 			<div class="profile-summary">
