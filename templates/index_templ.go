@@ -8,242 +8,134 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import (
-	"context"
-	"html/template"
-)
-
-func IndexTemplate(data map[string]interface{}) template.HTML {
-	return template.HTML(`
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My CV Portfolio</title>
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-top: 20px;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        h1:after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            margin: 10px auto;
-            border-radius: 2px;
-        }
-        .request-info {
-            background-color: #e9f7fe;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 25px 0;
-            font-family: monospace;
-            border-left: 5px solid #667eea;
-        }
-        .timestamp {
-            color: #666;
-            font-size: 0.9em;
-        }
-        .section {
-            margin: 30px 0;
-            padding: 25px;
-            border-radius: 10px;
-            background: #f8f9fa;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .section h2 {
-            color: #2c3e50;
-            margin-top: 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-        }
-        .experience-item, .education-item {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            border-left: 4px solid #667eea;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .experience-item:hover, .education-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .experience-item h3, .education-item h3 {
-            color: #2c3e50;
-            margin-top: 0;
-        }
-        .experience-item .company, .education-item .institution {
-            font-weight: bold;
-            color: #667eea;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .experience-item .period, .education-item .period {
-            color: #7f8c8d;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .contact-item {
-            flex: 1;
-            min-width: 200px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .contact-item i {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-        .btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px 5px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-        }
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .skill-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-        }
-        .profile-summary {
-            text-align: center;
-            margin: 30px 0;
-            padding: 20px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 10px;
-        }
-        .profile-summary p {
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Professional Portfolio</h1>
-        
-        <div class="request-info">
-            <strong>Request Details:</strong><br>
-            <span class="timestamp">Timestamp: ` + template.HTMLEscapeString(data["Timestamp"].(string)) + `</span><br>
-            Method: ` + data["Method"].(string) + `<br>
-            Path: ` + data["Path"].(string) + `<br>
-            Protocol: ` + data["Proto"].(string) + `<br>
-            Remote Address: ` + data["RemoteAddr"].(string) + `<br>
-            User Agent: ` + template.HTMLEscapeString(data["EscapedUserAgent"].(string)) + `
-        </div>
-
-        <div class="profile-summary">
-            <p>Passionate software engineer with expertise in building scalable web applications and leading technical teams. 
-            Specialized in Go, full-stack development, and modern architecture patterns.</p>
-        </div>
-
-        <div class="section" hx-get="/cv/experience" hx-target="#experience-content" hx-trigger="load">
-            <h2>Professional Experience</h2>
-            <div id="experience-content">
-                <!-- Experience will be loaded here via HTMX -->
-                <p>Loading experience...</p>
-            </div>
-        </div>
-
-        <div class="section" hx-get="/cv/education" hx-target="#education-content" hx-trigger="load">
-            <h2>Education</h2>
-            <div id="education-content">
-                <!-- Education will be loaded here via HTMX -->
-                <p>Loading education...</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Contact Information</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i>📧</i>
-                    <div><strong>Email:</strong> john.doe@example.com</div>
-                </div>
-                <div class="contact-item">
-                    <i>📱</i>
-                    <div><strong>Phone:</strong> +1 (123) 456-7890</div>
-                </div>
-                <div class="contact-item">
-                    <i>📍</i>
-                    <div><strong>Location:</strong> San Francisco, CA</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Skills</h2>
-            <div class="skills-container">
-                ` + func() template.HTML {
-		var skillsHTML template.HTML
-		for _, skill := range data["Skills"].([]string) {
-			skillsHTML += template.HTML(`<span class="skill-tag">` + skill + `</span>`)
+func IndexTemplate(data map[string]interface{}) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
 		}
-		return skillsHTML
-	}() + `
-            </div>
-        </div>
-
-        <p>Request received and logged successfully!</p>
-    </div>
-</body>
-</html>
-`)
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var1 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var1 == nil {
+			templ_7745c5c3_Var1 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>My CV Portfolio</title><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script><style>\n\t\t\tbody {\n\t\t\t\tfont-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n\t\t\t\tmax-width: 1000px;\n\t\t\t\tmargin: 0 auto;\n\t\t\t\tpadding: 20px;\n\t\t\t\tbackground: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n\t\t\t\tcolor: #333;\n\t\t\t\tmin-height: 100vh;\n\t\t\t}\n\t\t\t.container {\n\t\t\t\tbackground-color: white;\n\t\t\t\tpadding: 40px;\n\t\t\t\tborder-radius: 15px;\n\t\t\t\tbox-shadow: 0 10px 30px rgba(0,0,0,0.2);\n\t\t\t\tmargin-top: 20px;\n\t\t\t}\n\t\t\th1 {\n\t\t\t\tcolor: #2c3e50;\n\t\t\t\ttext-align: center;\n\t\t\t\tfont-size: 2.5em;\n\t\t\t\tmargin-bottom: 30px;\n\t\t\t\tposition: relative;\n\t\t\t}\n\t\t\th1:after {\n\t\t\t\tcontent: '';\n\t\t\t\tdisplay: block;\n\t\t\t\twidth: 100px;\n\t\t\t\theight: 4px;\n\t\t\t\tbackground: linear-gradient(45deg, #667eea, #764ba2);\n\t\t\t\tmargin: 10px auto;\n\t\t\t\tborder-radius: 2px;\n\t\t\t}\n\t\t\t.request-info {\n\t\t\t\tbackground-color: #e9f7fe;\n\t\t\t\tpadding: 20px;\n\t\t\t\tborder-radius: 10px;\n\t\t\t\tmargin: 25px 0;\n\t\t\t\tfont-family: monospace;\n\t\t\t\tborder-left: 5px solid #667eea;\n\t\t\t}\n\t\t\t.timestamp {\n\t\t\t\tcolor: #666;\n\t\t\t\tfont-size: 0.9em;\n\t\t\t}\n\t\t\t.section {\n\t\t\t\tmargin: 30px 0;\n\t\t\t\tpadding: 25px;\n\t\t\t\tborder-radius: 10px;\n\t\t\t\tbackground: #f8f9fa;\n\t\t\t\tbox-shadow: 0 2px 10px rgba(0,0,0,0.05);\n\t\t\t}\n\t\t\t.section h2 {\n\t\t\t\tcolor: #2c3e50;\n\t\t\t\tmargin-top: 0;\n\t\t\t\tpadding-bottom: 10px;\n\t\t\t\tborder-bottom: 2px solid #667eea;\n\t\t\t}\n\t\t\t.experience-item, .education-item {\n\t\t\t\tmargin: 20px 0;\n\t\t\t\tpadding: 20px;\n\t\t\t\tbackground-color: white;\n\t\t\t\tborder-radius: 8px;\n\t\t\t\tbox-shadow: 0 3px 10px rgba(0,0,0,0.08);\n\t\t\t\tborder-left: 4px solid #667eea;\n\t\t\t\ttransition: transform 0.3s ease, box-shadow 0.3s ease;\n\t\t\t}\n\t\t\t.experience-item:hover, .education-item:hover {\n\t\t\t\ttransform: translateY(-5px);\n\t\t\t\tbox-shadow: 0 5px 15px rgba(0,0,0,0.1);\n\t\t\t}\n\t\t\t.experience-item h3, .education-item h3 {\n\t\t\t\tcolor: #2c3e50;\n\t\t\t\tmargin-top: 0;\n\t\t\t}\n\t\t\t.experience-item .company, .education-item .institution {\n\t\t\t\tfont-weight: bold;\n\t\t\t\tcolor: #667eea;\n\t\t\t\tdisplay: block;\n\t\t\t\tmargin-bottom: 8px;\n\t\t\t}\n\t\t\t.experience-item .period, .education-item .period {\n\t\t\t\tcolor: #7f8c8d;\n\t\t\t\tfont-size: 0.9em;\n\t\t\t\tmargin-bottom: 10px;\n\t\t\t}\n\t\t\t.contact-info {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-wrap: wrap;\n\t\t\t\tgap: 20px;\n\t\t\t\tmargin-top: 20px;\n\t\t\t}\n\t\t\t.contact-item {\n\t\t\t\tflex: 1;\n\t\t\t\tmin-width: 200px;\n\t\t\t\tpadding: 15px;\n\t\t\t\tbackground-color: #f8f9fa;\n\t\t\t\tborder-radius: 8px;\n\t\t\t\ttext-align: center;\n\t\t\t\tbox-shadow: 0 2px 5px rgba(0,0,0,0.05);\n\t\t\t}\n\t\t\t.contact-item i {\n\t\t\t\tfont-size: 1.5em;\n\t\t\t\tmargin-bottom: 10px;\n\t\t\t\tcolor: #667eea;\n\t\t\t}\n\t\t\t.btn {\n\t\t\t\tbackground: linear-gradient(45deg, #667eea, #764ba2);\n\t\t\t\tcolor: white;\n\t\t\t\tpadding: 12px 25px;\n\t\t\t\tborder: none;\n\t\t\t\tborder-radius: 30px;\n\t\t\t\tcursor: pointer;\n\t\t\t\ttext-decoration: none;\n\t\t\t\tdisplay: inline-block;\n\t\t\t\tmargin: 10px 5px;\n\t\t\t\tfont-weight: bold;\n\t\t\t\ttransition: all 0.3s ease;\n\t\t\t\tbox-shadow: 0 4px 15px rgba(0,0,0,0.2);\n\t\t\t}\n\t\t\t.btn:hover {\n\t\t\t\ttransform: translateY(-3px);\n\t\t\t\tbox-shadow: 0 6px 20px rgba(0,0,0,0.25);\n\t\t\t}\n\t\t\t.skills-container {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-wrap: wrap;\n\t\t\t\tgap: 15px;\n\t\t\t\tmargin-top: 20px;\n\t\t\t}\n\t\t\t.skill-tag {\n\t\t\t\tbackground: linear-gradient(45deg, #667eea, #764ba2);\n\t\t\t\tcolor: white;\n\t\t\t\tpadding: 8px 15px;\n\t\t\t\tborder-radius: 20px;\n\t\t\t\tfont-size: 0.9em;\n\t\t\t}\n\t\t\t.profile-summary {\n\t\t\t\ttext-align: center;\n\t\t\t\tmargin: 30px 0;\n\t\t\t\tpadding: 20px;\n\t\t\t\tbackground: linear-gradient(45deg, #667eea, #764ba2);\n\t\t\t\tcolor: white;\n\t\t\t\tborder-radius: 10px;\n\t\t\t}\n\t\t\t.profile-summary p {\n\t\t\t\tfont-size: 1.1em;\n\t\t\t\tline-height: 1.6;\n\t\t\t}\n\t\t</style></head><body><div class=\"container\"><h1>Professional Portfolio</h1><div class=\"request-info\"><strong>Request Details:</strong><br><span class=\"timestamp\">Timestamp: ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(data["Timestamp"].(string))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 168, Col: 67}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</span><br>Method: ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(data["Method"].(string))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 169, Col: 37}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<br>Path: ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(data["Path"].(string))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 170, Col: 33}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<br>Protocol: ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(data["Proto"].(string))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 171, Col: 38}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<br>Remote Address: ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(data["RemoteAddr"].(string))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 172, Col: 49}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<br>User Agent: ")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var7 string
+		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(data["EscapedUserAgent"].(string))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 173, Col: 51}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div><div class=\"profile-summary\"><p>Passionate software engineer with expertise in building scalable web applications and leading technical teams.  Specialized in Go, full-stack development, and modern architecture patterns.</p></div><div class=\"section\" hx-get=\"/cv/experience\" hx-target=\"#experience-content\" hx-trigger=\"load\"><h2>Professional Experience</h2><div id=\"experience-content\"><!-- Experience will be loaded here via HTMX --><p>Loading experience...</p></div></div><div class=\"section\" hx-get=\"/cv/education\" hx-target=\"#education-content\" hx-trigger=\"load\"><h2>Education</h2><div id=\"education-content\"><!-- Education will be loaded here via HTMX --><p>Loading education...</p></div></div><div class=\"section\"><h2>Contact Information</h2><div class=\"contact-info\"><div class=\"contact-item\"><i>📧</i><div><strong>Email:</strong> john.doe@example.com</div></div><div class=\"contact-item\"><i>📱</i><div><strong>Phone:</strong> +1 (123) 456-7890</div></div><div class=\"contact-item\"><i>📍</i><div><strong>Location:</strong> San Francisco, CA</div></div></div></div><div class=\"section\"><h2>Skills</h2><div class=\"skills-container\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		for _, skill := range data["Skills"].([]string) {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<span class=\"skill-tag\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var8 string
+			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(skill)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 219, Col: 37}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</span>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</div></div><p>Request received and logged successfully!</p></div></body></html>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
 }
 
 var _ = templruntime.GeneratedTemplate
