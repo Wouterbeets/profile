@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"./templates"
 )
 
 func main() {
@@ -114,7 +115,7 @@ func main() {
 			},
 		}
 
-		ExperienceTemplate(experienceData).Render(r.Context(), w)
+		templates.ExperienceTemplate(experienceData).Render(r.Context(), w)
 	})
 
 	// Handle education section
@@ -145,7 +146,7 @@ func main() {
 			},
 		}
 
-		EducationTemplate(educationData).Render(r.Context(), w)
+		templates.EducationTemplate(educationData).Render(r.Context(), w)
 	})
 
 	// Create server

@@ -1,24 +1,11 @@
 package templates
 
-import (
-	"context"
-	"html/template"
-)
-
-func EducationTemplate(data map[string]interface{}) template.HTML {
-	return template.HTML(`
-` + func() template.HTML {
-		var educationHTML template.HTML
-		for _, item := range data["EducationItems"].([]map[string]interface{}) {
-			educationHTML += template.HTML(`
-<div class="education-item">
-    <h3>` + item["Title"].(string) + `</h3>
-    <span class="institution">` + item["Institution"].(string) + `</span>
-    <span class="period">` + item["Period"].(string) + `</span>
-</div>
-`)
-		}
-		return educationHTML
-	}() + `
-`)
+templ EducationTemplate(data map[string]interface{}) {
+	for _, item := range data["EducationItems"].([]map[string]interface{}) {
+		<div class="education-item">
+			<h3>{ item["Title"].(string) }</h3>
+			<span class="institution">{ item["Institution"].(string) }</span>
+			<span class="period">{ item["Period"].(string) }</span>
+		</div>
+	}
 }
