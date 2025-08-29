@@ -49,7 +49,7 @@ func main() {
 		}
 
 		// Execute template
-		IndexTemplate(data).Render(r.Context(), w)
+		templates.IndexTemplate(data).Render(r.Context(), w)
 	})
 
 	// Handle experience section
