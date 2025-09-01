@@ -1,5 +1,8 @@
 package templates
 
+import "fmt"
+import "strings"
+
 templ ProjectsTemplate(data map[string]interface{}) {
 	<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 		for _, item := range data["ProjectItems"].([]map[string]interface{}) {
