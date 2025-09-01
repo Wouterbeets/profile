@@ -7,11 +7,11 @@
 }
 
 .timeline-item {
-	@apply flex mb-8;
+	@apply flex mb-12;
 }
 
 .timeline-content {
-	@apply bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg ml-8;
+	@apply bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg ml-8;
 }
 
 .timeline::before {
