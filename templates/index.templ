@@ -22,6 +22,11 @@ templ IndexTemplate(data IndexData) {
 	<body class="bg-gradient-to-br from-indigo-500 to-pink-500 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white min-h-screen font-sans">
 		<!-- Hero Section -->
 		<header class="relative overflow-hidden">
+			<!-- Language Toggle -->
+			<div class="absolute top-4 right-4 z-30 flex space-x-2">
+				<button onclick="setLanguage('en')" class="bg-white text-indigo-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition">EN</button>
+				<button onclick="setLanguage('fr')" class="bg-white text-indigo-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition">FR</button>
+			</div>
 			<div class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-pink-600 opacity-20 animate-pulse"></div>
 			<div class="container mx-auto px-4 py-20 relative z-10">
 				<div class="text-center animate__animated animate__fadeIn">
@@ -39,9 +44,6 @@ templ IndexTemplate(data IndexData) {
 				<a href="#projects" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ GetTranslation("projects", data.Language) }</a>
 				<a href="#skills" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ GetTranslation("skills", data.Language) }</a>
 				<a href="#contact" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ GetTranslation("contact", data.Language) }</a>
-				<!-- Language Switcher -->
-				<button onclick="setLanguage('en')" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">English</button>
-				<button onclick="setLanguage('fr')" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">Français</button>
 			</div>
 		</nav>
 
