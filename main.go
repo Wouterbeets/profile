@@ -15,6 +15,42 @@ import (
 	"testserver/templates"
 )
 
+// Define structs for data
+type ExperienceItem struct {
+	Title       string   `json:"Title"`
+	Company     string   `json:"Company"`
+	Period      string   `json:"Period"`
+	Description []string `json:"Description"`
+}
+
+type ExperienceData struct {
+	ExperienceItems []ExperienceItem `json:"ExperienceItems"`
+}
+
+type EducationItem struct {
+	Title       string `json:"Title"`
+	Institution string `json:"Institution"`
+	Period      string `json:"Period"`
+}
+
+type EducationData struct {
+	EducationItems []EducationItem `json:"EducationItems"`
+}
+
+type ProjectItem struct {
+	Title       string `json:"Title"`
+	Description string `json:"Description"`
+	GitHubLink  string `json:"GitHubLink"`
+}
+
+type ProjectsData struct {
+	ProjectItems []ProjectItem `json:"ProjectItems"`
+}
+
+type IndexData struct {
+	Skills []string `json:"Skills"`
+}
+
 type GitHubRepo struct {
 	Stars int `json:"stargazers_count"`
 	Forks int `json:"forks_count"`
@@ -34,15 +70,15 @@ func main() {
 	router.Handle("/manifest.json", http.FileServer(http.Dir(".")))
 	router.Handle("/sw.js", http.FileServer(http.Dir(".")))
 
-	// Load data from JSON
-	experienceData := loadData("data/experience.json")
-	educationData := loadData("data/education.json")
-	projectsData := loadData("data/projects.json")
+	// Load data from JSON into structs
+	experienceData := loadExperienceData("data/experience.json")
+	educationData := loadEducationData("data/education.json")
+	projectsData := loadProjectsData("data/projects.json")
 
 	// Handle root route
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		data := map[string]interface{}{
-			"Skills": []string{
+		data := IndexData{
+			Skills: []string{
 				"Go Programming", "Python", "C", "React",
 				"Microservices Architecture", "Cloud Technologies",
 				"DevOps Practices", "Database Design", "System Design",
@@ -142,14 +178,38 @@ func main() {
 	}
 }
 
-func loadData(filename string) map[string]interface{} {
+func loadExperienceData(filename string) ExperienceData {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Printf("Error loading %s: %v", filename, err)
-		return map[string]interface{}{}
+		return ExperienceData{}
 	}
 	defer file.Close()
-	var data map[string]interface{}
+	var data ExperienceData
+	json.NewDecoder(file).Decode(&data)
+	return data
+}
+
+func loadEducationData(filename string) EducationData {
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Printf("Error loading %s: %v", filename, err)
+		return EducationData{}
+	}
+	defer file.Close()
+	var data EducationData
+	json.NewDecoder(file).Decode(&data)
+	return data
+}
+
+func loadProjectsData(filename string) ProjectsData {
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Printf("Error loading %s: %v", filename, err)
+		return ProjectsData{}
+	}
+	defer file.Close()
+	var data ProjectsData
 	json.NewDecoder(file).Decode(&data)
 	return data
 }
