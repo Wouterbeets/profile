@@ -11,6 +11,7 @@ import (
 	"net/smtp"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -52,10 +53,45 @@ func main() {
 	router.Use(middleware.Compress(5)) // GZIP compression
 	router.Use(middleware.Recoverer)
 
-	// Static files
-	router.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.FS(embeddedFS))))
-	router.Handle("/manifest.json", http.FileServer(http.FS(embeddedFS)))
-	router.Handle("/sw.js", http.FileServer(http.FS(embeddedFS)))
+	// Static files with correct MIME types
+	router.HandleFunc("/static/*", func(w http.ResponseWriter, r *http.Request) {
+		path := strings.TrimPrefix(r.URL.Path, "/static/")
+		file, err := embeddedFS.Open("static/" + path)
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+		defer file.Close()
+		// Set Content-Type based on extension
+		if strings.HasSuffix(path, ".css") {
+			w.Header().Set("Content-Type", "text/css")
+		} else if strings.HasSuffix(path, ".js") {
+			w.Header().Set("Content-Type", "application/javascript")
+		}
+		http.ServeContent(w, r, path, time.Time{}, file)
+	})
+
+	router.HandleFunc("/manifest.json", func(w http.ResponseWriter, r *http.Request) {
+		file, err := embeddedFS.Open("manifest.json")
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+		defer file.Close()
+		w.Header().Set("Content-Type", "application/json")
+		http.ServeContent(w, r, "manifest.json", time.Time{}, file)
+	})
+
+	router.HandleFunc("/sw.js", func(w http.ResponseWriter, r *http.Request) {
+		file, err := embeddedFS.Open("sw.js")
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+		defer file.Close()
+		w.Header().Set("Content-Type", "application/javascript")
+		http.ServeContent(w, r, "sw.js", time.Time{}, file)
+	})
 
 	// Handle root route
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
