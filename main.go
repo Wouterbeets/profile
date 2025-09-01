@@ -20,106 +20,6 @@ type GitHubRepo struct {
 	Forks int `json:"forks_count"`
 }
 
-// Translation maps for static text
-var translations = map[string]map[string]string{
-	"name_label": {
-		"en": "Name",
-		"fr": "Nom",
-	},
-	"email_label": {
-		"en": "Email",
-		"fr": "Email",
-	},
-	"message_label": {
-		"en": "Message",
-		"fr": "Message",
-	},
-	"send_message": {
-		"en": "Send Message",
-		"fr": "Envoyer le Message",
-	},
-	"loading_experience": {
-		"en": "Loading experience...",
-		"fr": "Chargement de l'expérience...",
-	},
-	"loading_education": {
-		"en": "Loading education...",
-		"fr": "Chargement de l'éducation...",
-	},
-	"loading_projects": {
-		"en": "Loading projects...",
-		"fr": "Chargement des projets...",
-	},
-	"loading_contact": {
-		"en": "Loading contact form...",
-		"fr": "Chargement du formulaire de contact...",
-	},
-	"filter_skills": {
-		"en": "Filter skills...",
-		"fr": "Filtrer les compétences...",
-	},
-	"professional_experience": {
-		"en": "Professional Experience",
-		"fr": "Expérience Professionnelle",
-	},
-	"education": {
-		"en": "Education",
-		"fr": "Éducation",
-	},
-	"personal_projects": {
-		"en": "Personal Projects",
-		"fr": "Projets Personnels",
-	},
-	"skills": {
-		"en": "Skills",
-		"fr": "Compétences",
-	},
-	"contact_me": {
-		"en": "Contact Me",
-		"fr": "Contactez-Moi",
-	},
-	"experience": {
-		"en": "Experience",
-		"fr": "Expérience",
-	},
-	"projects": {
-		"en": "Projects",
-		"fr": "Projets",
-	},
-	"contact": {
-		"en": "Contact",
-		"fr": "Contact",
-	},
-	"message_sent": {
-		"en": "Message sent successfully!",
-		"fr": "Message envoyé avec succès !",
-	},
-	"failed_send": {
-		"en": "Failed to send email",
-		"fr": "Échec de l'envoi de l'email",
-	},
-	"all_fields_required": {
-		"en": "All fields are required",
-		"fr": "Tous les champs sont requis",
-	},
-	"loading_stats": {
-		"en": "Loading stats...",
-		"fr": "Chargement des statistiques...",
-	},
-	"view_on_github": {
-		"en": "View on GitHub",
-		"fr": "Voir sur GitHub",
-	},
-}
-
-// Helper to get translation
-func getTranslation(key, lang string) string {
-	if val, ok := translations[key][lang]; ok {
-		return val
-	}
-	return translations[key]["en"] // Fallback to English
-}
-
 // Helper to detect language from query param or cookie
 func detectLanguage(r *http.Request) string {
 	lang := r.URL.Query().Get("lang")
@@ -162,7 +62,7 @@ func main() {
 				"Cross-Language Integration", "Panic Recovery & Error Handling", "File-Based Persistence",
 				"Desktop Application Development", "Markdown Parsing for UI", "JSON Data Handling", "Logging & Debugging",
 			},
-			Translations: translations,
+			Translations: templates.Translations,
 			Language:    lang,
 		}
 		templates.IndexTemplate(data).Render(r.Context(), w)
@@ -174,7 +74,7 @@ func main() {
 		w.Header().Set("Content-Type", "text/html")
 		data := loadExperienceData(lang)
 		data.Language = lang
-		data.Translations = translations
+		data.Translations = templates.Translations
 		templates.ExperienceTemplate(data).Render(r.Context(), w)
 	})
 
@@ -184,7 +84,7 @@ func main() {
 		w.Header().Set("Content-Type", "text/html")
 		data := loadEducationData(lang)
 		data.Language = lang
-		data.Translations = translations
+		data.Translations = templates.Translations
 		templates.EducationTemplate(data).Render(r.Context(), w)
 	})
 
@@ -194,7 +94,7 @@ func main() {
 		w.Header().Set("Content-Type", "text/html")
 		data := loadProjectsData(lang)
 		data.Language = lang
-		data.Translations = translations
+		data.Translations = templates.Translations
 		templates.ProjectsTemplate(data).Render(r.Context(), w)
 	})
 
@@ -202,7 +102,7 @@ func main() {
 	router.Get("/contact", func(w http.ResponseWriter, r *http.Request) {
 		lang := detectLanguage(r)
 		w.Header().Set("Content-Type", "text/html")
-		templates.ContactTemplate(lang, translations).Render(r.Context(), w)
+		templates.ContactTemplate(lang, templates.Translations).Render(r.Context(), w)
 	})
 
 	// New: Handle contact form submission
@@ -212,17 +112,17 @@ func main() {
 		email := r.FormValue("email")
 		message := r.FormValue("message")
 		if name == "" || email == "" || message == "" {
-			http.Error(w, getTranslation("all_fields_required", lang), http.StatusBadRequest)
+			http.Error(w, templates.GetTranslation("all_fields_required", lang), http.StatusBadRequest)
 			return
 		}
 		// Send email (configure SMTP)
 		err := sendEmail(name, email, message)
 		if err != nil {
-			http.Error(w, getTranslation("failed_send", lang), http.StatusInternalServerError)
+			http.Error(w, templates.GetTranslation("failed_send", lang), http.StatusInternalServerError)
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(getTranslation("message_sent", lang)))
+		w.Write([]byte(templates.GetTranslation("message_sent", lang)))
 	})
 
 	// New: Handle GitHub stats

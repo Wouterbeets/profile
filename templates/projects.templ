@@ -8,9 +8,9 @@ templ ProjectsTemplate(data ProjectsData) {
 		<div class="project-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105 animate__animated animate__fadeInUp">
 			<h3 class="text-xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
 			<p class="text-gray-700 dark:text-gray-200 mb-4">{ item.Description }</p>
-			<a href={ item.GitHubLink } target="_blank" class="text-pink-500 hover:text-pink-700">{ getTranslation("view_on_github", data.Language) }</a>
+			<a href={ item.GitHubLink } target="_blank" class="text-pink-500 hover:text-pink-700">{ GetTranslation("view_on_github", data.Language) }</a>
 			<div hx-get={ fmt.Sprintf("/api/github-stats/%s", strings.Split(item.GitHubLink, "github.com/")[1]) } hx-target={ "#stats-" + strings.ReplaceAll(item.Title, " ", "-") } hx-trigger="load" id={ "stats-" + strings.ReplaceAll(item.Title, " ", "-") }>
-				<p>{ getTranslation("loading_stats", data.Language) }</p>
+				<p>{ GetTranslation("loading_stats", data.Language) }</p>
 			</div>
 		</div>
 	} </div>
