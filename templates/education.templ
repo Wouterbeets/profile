@@ -1,11 +1,15 @@
 package templates
 
 templ EducationTemplate(data map[string]interface{}) {
-	for _, item := range data["EducationItems"].([]map[string]interface{}) {
-		<div class="education-item">
-			<h3>{ item["Title"].(string) }</h3>
-			<span class="institution">{ item["Institution"].(string) }</span>
-			<span class="period">{ item["Period"].(string) }</span>
-		</div>
-	}
+	<div class="timeline">
+		for _, item := range data["EducationItems"].([]map[string]interface{}) {
+			<div class="timeline-item animate__animated animate__slideInRight">
+				<div class="timeline-content">
+					<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item["Title"].(string) }</h3>
+					<span class="institution text-lg text-gray-600 dark:text-gray-300">{ item["Institution"].(string) }</span>
+					<span class="period text-sm text-gray-500">{ item["Period"].(string) }</span>
+				</div>
+			</div>
+		}
+	</div>
 }

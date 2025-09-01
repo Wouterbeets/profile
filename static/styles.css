@@ -1,0 +1,26 @@
+.skill-tag {
+	@apply bg-gradient-to-r from-indigo-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-medium;
+}
+
+.timeline {
+	@apply relative;
+}
+
+.timeline-item {
+	@apply flex mb-8;
+}
+
+.timeline-content {
+	@apply bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg ml-8;
+}
+
+.timeline::before {
+	content: '';
+	@apply absolute left-4 top-0 bottom-0 w-1 bg-indigo-500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate__animated {
+		animation: none !important;
+	}
+}

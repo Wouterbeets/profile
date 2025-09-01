@@ -1,16 +1,20 @@
 package templates
 
 templ ExperienceTemplate(data map[string]interface{}) {
-	for _, item := range data["ExperienceItems"].([]map[string]interface{}) {
-		<div class="experience-item">
-			<h3>{ item["Title"].(string) }</h3>
-			<span class="company">{ item["Company"].(string) }</span>
-			<span class="period">{ item["Period"].(string) }</span>
-			<ul>
-				for _, desc := range item["Description"].([]string) {
-					<li>{ desc }</li>
-				}
-			</ul>
-		</div>
-	}
+	<div class="timeline">
+		for _, item := range data["ExperienceItems"].([]map[string]interface{}) {
+			<div class="timeline-item animate__animated animate__slideInLeft">
+				<div class="timeline-content">
+					<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item["Title"].(string) }</h3>
+					<span class="company text-lg text-gray-600 dark:text-gray-300">{ item["Company"].(string) }</span>
+					<span class="period text-sm text-gray-500">{ item["Period"].(string) }</span>
+					<ul class="mt-4 space-y-2">
+						for _, desc := range item["Description"].([]string) {
+							<li class="text-gray-700 dark:text-gray-200">{ desc }</li>
+						}
+					</ul>
+				</div>
+			</div>
+		}
+	</div>
 }

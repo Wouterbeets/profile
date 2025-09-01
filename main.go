@@ -1,38 +1,48 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+	"io"
 	"log"
 	"net/http"
+	"net/smtp"
+	"os"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"testserver/templates"
 )
+
+type GitHubRepo struct {
+	Stars int `json:"stargazers_count"`
+	Forks int `json:"forks_count"`
+}
 
 func main() {
 	// Create a new Chi router
 	router := chi.NewRouter()
 
-	// Middleware to log requests
-	router.Use(func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			// Log request details
-			log.Printf(
-				"[%s] %s %s %s from %s (User-Agent: %s)",
-				time.Now().Format(time.RFC3339),
-				r.Method,
-				r.URL.Path,
-				r.Proto,
-				r.RemoteAddr,
-				r.UserAgent(),
-			)
-			next.ServeHTTP(w, r)
-		})
-	})
+	// Middleware
+	router.Use(middleware.Logger)
+	router.Use(middleware.Compress(5)) // GZIP compression
+	router.Use(middleware.Recoverer)
+
+	// Static files
+	router.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	router.Handle("/manifest.json", http.FileServer(http.Dir(".")))
+	router.Handle("/sw.js", http.FileServer(http.Dir(".")))
+
+	// Load data from JSON
+	experienceData := loadData("data/experience.json")
+	educationData := loadData("data/education.json")
+	projectsData := loadData("data/projects.json")
 
 	// Handle root route
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		// Prepare data for template
 		data := map[string]interface{}{
 			"Skills": []string{
 				"Go Programming", "Python", "C", "React",
@@ -41,131 +51,85 @@ func main() {
 				"Leadership", "Team Management", "Technical Vision",
 			},
 		}
-
-		// Execute template
 		templates.IndexTemplate(data).Render(r.Context(), w)
 	})
 
 	// Handle experience section
 	router.Get("/cv/experience", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
-		experienceData := map[string]interface{}{
-			"ExperienceItems": []map[string]interface{}{
-				{
-					"Title":   "CTO",
-					"Company": "La Clinique E-Santé",
-					"Period":  "February 2023 - January 2025, Paris, France",
-					"Description": []string{
-						"Led the technical vision and architecture for an online mental health therapy platform offering 24/7 access via message, audio, and video",
-						"Oversaw development and maintenance of mobile and web applications, ensuring secure, reimbursable consultations and seamless patient-psychologist communication",
-						"Managed a team of developers to implement features for anxiety management, brief therapies (e.g., CBT, EMDR, hypnosis), and integrative mental health solutions",
-						"Handled platform scalability and privacy compliance for e-health services, contributing to the company's mission of making mental health accessible until its closure",
-					},
-				},
-				{
-					"Title":   "Payment Platform Staff Engineer",
-					"Company": "leboncoin",
-					"Period":  "2022 - January 2023, Paris, France",
-					"Description": []string{
-						"Defined the technical architecture vision for 4 teams",
-					},
-				},
-				{
-					"Title":   "Lead Developer",
-					"Company": "leboncoin",
-					"Period":  "2019 - 2022, Paris, France",
-					"Description": []string{
-						"Provided organizational and technical support to 100 developers",
-					},
-				},
-				{
-					"Title":   "Backend Developer",
-					"Company": "leboncoin",
-					"Period":  "2017 - 2019, Paris, France",
-					"Description": []string{
-						"Migrated the legacy codebase to a microservices architecture",
-						"Integrated new payment service providers",
-					},
-				},
-				{
-					"Title":   "Fullstack Developer",
-					"Company": "Artefact",
-					"Period":  "2015 - 2017, Paris, France",
-					"Description": []string{
-						"Managed a big data analytics tool",
-						"Served as Scrum Master for the product team",
-					},
-				},
-				{
-					"Title":   "Home Cooking Service Entrepreneur",
-					"Company": "Thuis aan Tafel - Netherlands",
-					"Period":  "2012 - 2015, Netherlands",
-					"Description": []string{
-						"Created and maintained a software solution using MS ACCESS",
-						"Managed accounting and financial responsibility",
-					},
-				},
-			},
-		}
-
 		templates.ExperienceTemplate(experienceData).Render(r.Context(), w)
 	})
 
 	// Handle education section
 	router.Get("/cv/education", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
-		educationData := map[string]interface{}{
-			"EducationItems": []map[string]interface{}{
-				{
-					"Title":       "Grande École Numérique",
-					"Institution": "École 42",
-					"Period":      "September 2013 - 2016, RNCP Level 1",
-				},
-				{
-					"Title":       "Communication and Multimedia Design",
-					"Institution": "Hogeschool van Amsterdam",
-					"Period":      "September 2007 - 2008",
-				},
-				{
-					"Title":       "Engineering, Design and Innovation",
-					"Institution": "Hogeschool van Amsterdam",
-					"Period":      "September 2006 - 2007",
-				},
-				{
-					"Title":       "Hoger Algemeen Voortgezet Onderwijs",
-					"Institution": "Equivalent to high school diploma",
-					"Period":      "September 2001 - 2006",
-				},
-			},
-		}
-
 		templates.EducationTemplate(educationData).Render(r.Context(), w)
 	})
 
 	// Handle projects section
 	router.Get("/cv/projects", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
-		projectsData := map[string]interface{}{
-			"ProjectItems": []map[string]interface{}{
-				{
-					"Title":       "Portfolio Website",
-					"Description": "A personal portfolio website built with Go and Templ, showcasing professional experience, education, and projects.",
-					"GitHubLink":  "https://github.com/user/portfolio",
-				},
-				{
-					"Title":       "Microservices Chat App",
-					"Description": "A real-time chat application using microservices architecture with Go, Docker, and Kubernetes.",
-					"GitHubLink":  "https://github.com/user/chat-app",
-				},
-				{
-					"Title":       "Data Analytics Tool",
-					"Description": "A tool for big data analytics built with Python and React, featuring interactive dashboards.",
-					"GitHubLink":  "https://github.com/user/analytics-tool",
-				},
-			},
-		}
-
 		templates.ProjectsTemplate(projectsData).Render(r.Context(), w)
+	})
+
+	// New: Handle contact form submission
+	router.Post("/contact-submit", func(w http.ResponseWriter, r *http.Request) {
+		name := r.FormValue("name")
+		email := r.FormValue("email")
+		message := r.FormValue("message")
+		if name == "" || email == "" || message == "" {
+			http.Error(w, "All fields are required", http.StatusBadRequest)
+			return
+		}
+		// Send email (configure SMTP)
+		err := sendEmail(name, email, message)
+		if err != nil {
+			http.Error(w, "Failed to send email", http.StatusInternalServerError)
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("Message sent successfully!"))
+	})
+
+	// New: Handle GitHub stats
+	router.Get("/api/github-stats/{repo}", func(w http.ResponseWriter, r *http.Request) {
+		repo := chi.URLParam(r, "repo")
+		token := os.Getenv("GITHUB_TOKEN") // Set your GitHub token
+		url := fmt.Sprintf("https://api.github.com/repos/%s", repo)
+		req, _ := http.NewRequest("GET", url, nil)
+		req.Header.Set("Authorization", "token "+token)
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			http.Error(w, "Failed to fetch stats", http.StatusInternalServerError)
+			return
+		}
+		defer resp.Body.Close()
+		body, _ := io.ReadAll(resp.Body)
+		var repoData GitHubRepo
+		json.Unmarshal(body, &repoData)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]int{"stars": repoData.Stars, "forks": repoData.Forks})
+	})
+
+	// New: Handle skills filter
+	router.Get("/cv/skills", func(w http.ResponseWriter, r *http.Request) {
+		query := r.URL.Query().Get("q")
+		allSkills := []string{
+			"Go Programming", "Python", "C", "React",
+			"Microservices Architecture", "Cloud Technologies",
+			"DevOps Practices", "Database Design", "System Design",
+			"Leadership", "Team Management", "Technical Vision",
+		}
+		filtered := []string{}
+		for _, skill := range allSkills {
+			if strings.Contains(strings.ToLower(skill), strings.ToLower(query)) {
+				filtered = append(filtered, skill)
+			}
+		}
+		w.Header().Set("Content-Type", "text/html")
+		for _, skill := range filtered {
+			fmt.Fprintf(w, `<span class="skill-tag animate__animated animate__fadeIn">%s</span>`, skill)
+		}
 	})
 
 	// Create server
@@ -174,9 +138,30 @@ func main() {
 		Handler: router,
 	}
 
-	// Start server and log any errors
 	log.Printf("Starting server on port 33333...")
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
+}
+
+func loadData(filename string) map[string]interface{} {
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Printf("Error loading %s: %v", filename, err)
+		return map[string]interface{}{}
+	}
+	defer file.Close()
+	var data map[string]interface{}
+	json.NewDecoder(file).Decode(&data)
+	return data
+}
+
+func sendEmail(name, email, message string) error {
+	from := "your-email@example.com" // Configure
+	to := "recipient@example.com"
+	smtpHost := "smtp.example.com" // Configure
+	smtpPort := "587"
+	auth := smtp.PlainAuth("", from, "password", smtpHost) // Configure
+	msg := fmt.Sprintf("Subject: Contact from %s\n\nName: %s\nEmail: %s\nMessage: %s", name, name, email, message)
+	return smtp.SendMail(smtpHost+":"+smtpPort, auth, from, []string{to}, []byte(msg))
 }

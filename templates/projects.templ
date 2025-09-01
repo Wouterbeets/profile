@@ -1,11 +1,16 @@
 package templates
 
 templ ProjectsTemplate(data map[string]interface{}) {
-    for _, item := range data["ProjectItems"].([]map[string]interface{}) {
-        <div class="project-item">
-            <h3>{ item["Title"].(string) }</h3>
-            <p>{ item["Description"].(string) }</p>
-            <a href={ item["GitHubLink"].(string) } target="_blank">View on GitHub</a>
-        </div>
-    }
+	<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+		for _, item := range data["ProjectItems"].([]map[string]interface{}) {
+			<div class="project-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105 animate__animated animate__fadeInUp" hx-get={ fmt.Sprintf("/cv/projects/%s", item["Title"].(string)) } hx-target="this" hx-swap="innerHTML">
+				<h3 class="text-xl font-bold text-indigo-600 dark:text-pink-400 mb-4">{ item["Title"].(string) }</h3>
+				<p class="text-gray-700 dark:text-gray-200 mb-4">{ item["Description"].(string) }</p>
+				<a href={ item["GitHubLink"].(string) } target="_blank" class="text-pink-500 hover:text-pink-700">View on GitHub</a>
+				<div hx-get={ fmt.Sprintf("/api/github-stats/%s", strings.Split(item["GitHubLink"].(string), "github.com/")[1]) } hx-target="#stats-{ item["Title"].(string) }" hx-trigger="load" id="stats-{ item["Title"].(string) }">
+					<p>Loading stats...</p>
+				</div>
+			</div>
+		}
+	</div>
 }
