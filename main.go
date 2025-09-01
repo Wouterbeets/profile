@@ -185,8 +185,8 @@ func loadProjectsData(filename string) templates.ProjectsData {
 }
 
 func sendEmail(name, email, message string) error {
-	from := "your-email@example.com" // Configure
-	to := "recipient@example.com"
+	from := "beetswouter@gmail.com" // Configure
+	to := "beetswouter@gmail.com"
 	smtpHost := "smtp.example.com" // Configure
 	smtpPort := "587"
 	auth := smtp.PlainAuth("", from, "password", smtpHost) // Configure
