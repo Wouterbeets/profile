@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -14,6 +15,9 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"testserver/templates"
 )
+
+//go:embed data/*.json static/* manifest.json sw.js
+var embeddedFS embed.FS
 
 type GitHubRepo struct {
 	Stars int `json:"stargazers_count"`
@@ -44,9 +48,9 @@ func main() {
 	router.Use(middleware.Recoverer)
 
 	// Static files
-	router.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
-	router.Handle("/manifest.json", http.FileServer(http.Dir(".")))
-	router.Handle("/sw.js", http.FileServer(http.Dir(".")))
+	router.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.FS(embeddedFS))))
+	router.Handle("/manifest.json", http.FileServer(http.FS(embeddedFS)))
+	router.Handle("/sw.js", http.FileServer(http.FS(embeddedFS)))
 
 	// Handle root route
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
@@ -184,11 +188,11 @@ func main() {
 
 func loadExperienceData(lang string) templates.ExperienceData {
 	filename := fmt.Sprintf("data/experience_%s.json", lang)
-	file, err := os.Open(filename)
+	file, err := embeddedFS.Open(filename)
 	if err != nil {
 		log.Printf("Error loading %s: %v, falling back to English", filename, err)
 		filename = "data/experience_en.json"
-		file, err = os.Open(filename)
+		file, err = embeddedFS.Open(filename)
 		if err != nil {
 			log.Printf("Error loading fallback %s: %v", filename, err)
 			return templates.ExperienceData{}
@@ -205,11 +209,11 @@ func loadExperienceData(lang string) templates.ExperienceData {
 
 func loadEducationData(lang string) templates.EducationData {
 	filename := fmt.Sprintf("data/education_%s.json", lang)
-	file, err := os.Open(filename)
+	file, err := embeddedFS.Open(filename)
 	if err != nil {
 		log.Printf("Error loading %s: %v, falling back to English", filename, err)
 		filename = "data/education_en.json"
-		file, err = os.Open(filename)
+		file, err = embeddedFS.Open(filename)
 		if err != nil {
 			log.Printf("Error loading fallback %s: %v", filename, err)
 			return templates.EducationData{}
@@ -226,11 +230,11 @@ func loadEducationData(lang string) templates.EducationData {
 
 func loadProjectsData(lang string) templates.ProjectsData {
 	filename := fmt.Sprintf("data/projects_%s.json", lang)
-	file, err := os.Open(filename)
+	file, err := embeddedFS.Open(filename)
 	if err != nil {
 		log.Printf("Error loading %s: %v, falling back to English", filename, err)
 		filename = "data/projects_en.json"
-		file, err = os.Open(filename)
+		file, err = embeddedFS.Open(filename)
 		if err != nil {
 			log.Printf("Error loading fallback %s: %v", filename, err)
 			return templates.ProjectsData{}
