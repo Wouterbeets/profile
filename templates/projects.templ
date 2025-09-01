@@ -4,17 +4,15 @@ import "fmt"
 import "strings"
 
 templ ProjectsTemplate(data map[string]interface{}) {
-	<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-		for _, itemInterface := range data["ProjectItems"].([]interface{}) {
-			item := itemInterface.(map[string]interface{})
-			<div class="project-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105 animate__animated animate__fadeInUp">
-				<h3 class="text-xl font-bold text-indigo-600 dark:text-pink-400 mb-4">{ item["Title"].(string) }</h3>
-				<p class="text-gray-700 dark:text-gray-200 mb-4">{ item["Description"].(string) }</p>
-				<a href={ item["GitHubLink"].(string) } target="_blank" class="text-pink-500 hover:text-pink-700">View on GitHub</a>
-				<div hx-get={ fmt.Sprintf("/api/github-stats/%s", strings.Split(item["GitHubLink"].(string), "github.com/")[1]) } hx-target={ "#stats-" + item["Title"].(string) } hx-trigger="load" id={ "stats-" + item["Title"].(string) }>
-					<p>Loading stats...</p>
-				</div>
+	<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"> for _, itemInterface := range data["ProjectItems"].([]interface{}) {
+		item := itemInterface.(map[string]interface{})
+		<div class="project-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105 animate__animated animate__fadeInUp">
+			<h3 class="text-xl font-bold text-indigo-600 dark:text-pink-400">{ item["Title"].(string) }</h3>
+			<p class="text-gray-700 dark:text-gray-200 mb-4">{ item["Description"].(string) }</p>
+			<a href={ item["GitHubLink"].(string) } target="_blank" class="text-pink-500 hover:text-pink-700">View on GitHub</a>
+			<div hx-get={ fmt.Sprintf("/api/github-stats/%s", strings.Split(item["GitHubLink"].(string), "github.com/")[1]) } hx-target={ "#stats-" + item["Title"].(string) } hx-trigger="load" id={ "stats-" + item["Title"].(string) }>
+				<p>Loading stats...</p>
 			</div>
-		}
-	</div>
+		</div>
+	} </div>
 }

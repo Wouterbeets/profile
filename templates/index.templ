@@ -68,11 +68,9 @@ templ IndexTemplate(data map[string]interface{}) {
 			<section id="skills" class="animate__animated animate__slideInUp">
 				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">Skills</h2>
 				<input type="text" placeholder="Filter skills..." hx-get="/cv/skills" hx-target="#skills-container" hx-trigger="keyup" name="q" class="w-full p-4 border rounded-lg mb-6">
-				<div id="skills-container" class="flex flex-wrap gap-4 justify-center">
-					for _, skill := range data["Skills"].([]string) {
-						<span class="skill-tag animate__animated animate__fadeIn">{ skill }</span>
-					}
-				</div>
+				<div id="skills-container" class="flex flex-wrap gap-4 justify-center"> for _, skill := range data["Skills"].([]string) {
+					<span class="skill-tag animate__animated animate__fadeIn">{ skill }</span>
+				} </div>
 			</section>
 
 			<section id="contact" class="animate__animated animate__slideInUp">
