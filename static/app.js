@@ -6,5 +6,5 @@ if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') 
 // Language switcher
 function setLanguage(lang) {
 	document.cookie = `language=${lang}; path=/; max-age=31536000`; // 1 year
-	window.location.reload();
+	window.location.search = `?lang=${lang}`;
 }
