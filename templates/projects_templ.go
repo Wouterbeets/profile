@@ -36,7 +36,8 @@ func ProjectsTemplate(data map[string]interface{}) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		for _, item := range data["ProjectItems"].([]map[string]interface{}) {
+		for _, itemInterface := range data["ProjectItems"].([]interface{}) {
+			item := itemInterface.(map[string]interface{})
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"project-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105 animate__animated animate__fadeInUp\"><h3 class=\"text-xl font-bold text-indigo-600 dark:text-pink-400 mb-4\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -99,7 +100,7 @@ func ProjectsTemplate(data map[string]interface{}) templ.Component {
 				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/projects.templ`, Line: 13, Col: 164}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
-			if templ_7745c5c3_Err != nil {
+			if templ_7745c5c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "\" hx-trigger=\"load\" id=\"")
