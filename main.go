@@ -117,14 +117,10 @@ func main() {
 		lang := detectLanguage(r)
 		data := templates.IndexData{
 			Skills: []string{
-				"Go Programming", "Python", "C", "React",
-				"Microservices Architecture", "Cloud Technologies",
-				"DevOps Practices", "Database Design", "System Design",
-				"Leadership", "Team Management", "Technical Vision",
-				"Concurrent Programming in Go", "Fyne Framework", "Event-Driven Programming",
-				"LLM Integration with Ollama", "Real-Time Audio Transcription", "Event Sourcing & CQRS", "Plugin Architecture",
-				"Cross-Language Integration", "Panic Recovery & Error Handling", "File-Based Persistence",
-				"Desktop Application Development", "Markdown Parsing for UI", "JSON Data Handling", "Logging & Debugging",
+				"Golang", "Python", "C", "React",
+				"Stripe", "HubSpot", "PostgreSQL", "Docker", "Kubernetes", "Git", "Agile Methodologies",
+				"Dutch (Native)", "English (Fluent)", "French (Fluent)",
+				"AI Integration", "Privacy-Conscious AI", "Event Sourcing", "Domain-Driven Design",
 			},
 			Translations: templates.Translations,
 			Language:    lang,
@@ -213,14 +209,10 @@ func main() {
 	router.Get("/cv/skills", func(w http.ResponseWriter, r *http.Request) {
 		query := r.URL.Query().Get("q")
 		allSkills := []string{
-			"Go Programming", "Python", "C", "React",
-			"Microservices Architecture", "Cloud Technologies",
-			"DevOps Practices", "Database Design", "System Design",
-			"Leadership", "Team Management", "Technical Vision",
-			"Concurrent Programming in Go", "Fyne Framework", "Event-Driven Programming",
-			"LLM Integration with Ollama", "Real-Time Audio Transcription", "Event Sourcing & CQRS", "Plugin Architecture",
-			"Cross-Language Integration", "Panic Recovery & Error Handling", "File-Based Persistence",
-			"Desktop Application Development", "Markdown Parsing for UI", "JSON Data Handling", "Logging & Debugging",
+			"Golang", "Python", "C", "React",
+			"Stripe", "HubSpot", "PostgreSQL", "Docker", "Kubernetes", "Git", "Agile Methodologies",
+			"Dutch (Native)", "English (Fluent)", "French (Fluent)",
+			"AI Integration", "Privacy-Conscious AI", "Event Sourcing", "Domain-Driven Design",
 		}
 		filtered := []string{}
 		for _, skill := range allSkills {
