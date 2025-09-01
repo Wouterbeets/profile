@@ -1,0 +1,24 @@
+{
+	"EducationItems": [
+		{
+			"Title": "Grande École Numérique",
+			"Institution": "École 42",
+			"Period": "September 2013 - 2016, RNCP Level 1"
+		},
+		{
+			"Title": "Communication and Multimedia Design",
+			"Institution": "Hogeschool van Amsterdam",
+			"Period": "September 2007 - 2008"
+		},
+		{
+			"Title": "Engineering, Design and Innovation",
+			"Institution": "Hogeschool van Amsterdam",
+			"Period": "September 2006 - 2007"
+		},
+		{
+			"Title": "Hoger Algemeen Voortgezet Onderwijs",
+			"Institution": "Equivalent to high school diploma",
+			"Period": "September 2001 - 2006"
+		}
+	]
+}

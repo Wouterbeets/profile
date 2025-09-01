@@ -1,0 +1,24 @@
+{
+	"ProjectItems": [
+		{
+			"Title": "Site Web de Portfolio",
+			"Description": "Un site web de portfolio personnel construit avec Go et Templ, mettant en valeur l'expérience professionnelle, l'éducation et les projets.",
+			"GitHubLink": "https://github.com/user/portfolio"
+		},
+		{
+			"Title": "Application de Chat Microservices",
+			"Description": "Une application de chat en temps réel utilisant l'architecture de microservices avec Go, Docker et Kubernetes.",
+			"GitHubLink": "https://github.com/user/chat-app"
+		},
+		{
+			"Title": "Outil d'Analyse de Données",
+			"Description": "Un outil pour l'analyse de big data construit avec Python et React, avec des tableaux de bord interactifs.",
+			"GitHubLink": "https://github.com/user/analytics-tool"
+		},
+		{
+			"Title": "Assistant IA MindPalace",
+			"Description": "Développé un assistant IA de bureau en Go utilisant l'approvisionnement d'événements, intégrant la transcription audio en temps réel (PortAudio, Python), les interactions LLM (API Ollama avec 131k contextes de jetons), et une interface graphique basée sur Fyne avec des thèmes personnalisés et des tableaux Kanban. Implémenté une architecture de plugin pour l'extensibilité, avec un plugin de gestionnaire de tâches prenant en charge les opérations CRUD de tâches.",
+			"GitHubLink": "https://github.com/user/mindpalace"
+		}
+	]
+}

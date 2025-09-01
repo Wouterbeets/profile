@@ -2,7 +2,7 @@ package templates
 
 templ IndexTemplate(data IndexData) {
 	<!DOCTYPE html>
-	<html lang="en">
+	<html lang={ data.Language }>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,49 +34,52 @@ templ IndexTemplate(data IndexData) {
 		<!-- Sticky Nav -->
 		<nav class="sticky top-0 bg-white dark:bg-gray-800 shadow-lg z-20">
 			<div class="container mx-auto px-4 py-4 flex justify-center space-x-8">
-				<a href="#experience" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">Experience</a>
-				<a href="#education" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">Education</a>
-				<a href="#projects" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">Projects</a>
-				<a href="#skills" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">Skills</a>
-				<a href="#contact" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">Contact</a>
+				<a href="#experience" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ getTranslation("experience", data.Language) }</a>
+				<a href="#education" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ getTranslation("education", data.Language) }</a>
+				<a href="#projects" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ getTranslation("projects", data.Language) }</a>
+				<a href="#skills" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ getTranslation("skills", data.Language) }</a>
+				<a href="#contact" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ getTranslation("contact", data.Language) }</a>
+				<!-- Language Switcher -->
+				<button onclick="setLanguage('en')" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">English</button>
+				<button onclick="setLanguage('fr')" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">Français</button>
 			</div>
 		</nav>
 
 		<!-- Sections -->
 		<main class="container mx-auto px-4 py-10 space-y-20">
 			<section id="experience" class="animate__animated animate__slideInUp">
-				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">Professional Experience</h2>
+				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">{ getTranslation("professional_experience", data.Language) }</h2>
 				<div hx-get="/cv/experience" hx-target="#experience-content" hx-trigger="load" id="experience-content">
-					<p class="text-center">Loading experience...</p>
+					<p class="text-center">{ getTranslation("loading_experience", data.Language) }</p>
 				</div>
 			</section>
 
 			<section id="education" class="animate__animated animate__slideInUp">
-				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">Education</h2>
+				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">{ getTranslation("education", data.Language) }</h2>
 				<div hx-get="/cv/education" hx-target="#education-content" hx-trigger="load" id="education-content">
-					<p class="text-center">Loading education...</p>
+					<p class="text-center">{ getTranslation("loading_education", data.Language) }</p>
 				</div>
 			</section>
 
 			<section id="projects" class="animate__animated animate__slideInUp">
-				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">Personal Projects</h2>
+				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">{ getTranslation("personal_projects", data.Language) }</h2>
 				<div hx-get="/cv/projects" hx-target="#projects-content" hx-trigger="load" id="projects-content">
-					<p class="text-center">Loading projects...</p>
+					<p class="text-center">{ getTranslation("loading_projects", data.Language) }</p>
 				</div>
 			</section>
 
 			<section id="skills" class="animate__animated animate__slideInUp">
-				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">Skills</h2>
-				<input type="text" placeholder="Filter skills..." hx-get="/cv/skills" hx-target="#skills-container" hx-trigger="keyup" name="q" class="w-full p-4 border rounded-lg mb-6 bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">{ getTranslation("skills", data.Language) }</h2>
+				<input type="text" placeholder={ getTranslation("filter_skills", data.Language) } hx-get="/cv/skills" hx-target="#skills-container" hx-trigger="keyup" name="q" class="w-full p-4 border rounded-lg mb-6 bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300">
 				<div id="skills-container" class="flex flex-wrap gap-4 justify-center"> for _, skill := range data.Skills {
 					<span class="skill-tag animate__animated animate__fadeIn">{ skill }</span>
 				} </div>
 			</section>
 
 			<section id="contact" class="animate__animated animate__slideInUp">
-				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">Contact Me</h2>
+				<h2 class="text-4xl font-bold text-center mb-10 text-indigo-600 dark:text-pink-400">{ getTranslation("contact_me", data.Language) }</h2>
 				<div hx-get="/contact" hx-target="#contact-content" hx-trigger="load" id="contact-content">
-					<p class="text-center">Loading contact form...</p>
+					<p class="text-center">{ getTranslation("loading_contact", data.Language) }</p>
 				</div>
 			</section>
 		</main>

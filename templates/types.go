@@ -10,6 +10,8 @@ type ExperienceItem struct {
 
 type ExperienceData struct {
 	ExperienceItems []ExperienceItem `json:"ExperienceItems"`
+	Language        string           `json:"-"`
+	Translations    map[string]map[string]string `json:"-"`
 }
 
 type EducationItem struct {
@@ -20,6 +22,8 @@ type EducationItem struct {
 
 type EducationData struct {
 	EducationItems []EducationItem `json:"EducationItems"`
+	Language       string          `json:"-"`
+	Translations   map[string]map[string]string `json:"-"`
 }
 
 type ProjectItem struct {
@@ -30,8 +34,12 @@ type ProjectItem struct {
 
 type ProjectsData struct {
 	ProjectItems []ProjectItem `json:"ProjectItems"`
+	Language     string        `json:"-"`
+	Translations map[string]map[string]string `json:"-"`
 }
 
 type IndexData struct {
-	Skills []string `json:"Skills"`
+	Skills       []string                      `json:"Skills"`
+	Language     string                        `json:"-"`
+	Translations map[string]map[string]string `json:"-"`
 }

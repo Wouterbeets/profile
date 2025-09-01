@@ -20,6 +20,120 @@ type GitHubRepo struct {
 	Forks int `json:"forks_count"`
 }
 
+// Translation maps for static text
+var translations = map[string]map[string]string{
+	"name_label": {
+		"en": "Name",
+		"fr": "Nom",
+	},
+	"email_label": {
+		"en": "Email",
+		"fr": "Email",
+	},
+	"message_label": {
+		"en": "Message",
+		"fr": "Message",
+	},
+	"send_message": {
+		"en": "Send Message",
+		"fr": "Envoyer le Message",
+	},
+	"loading_experience": {
+		"en": "Loading experience...",
+		"fr": "Chargement de l'expérience...",
+	},
+	"loading_education": {
+		"en": "Loading education...",
+		"fr": "Chargement de l'éducation...",
+	},
+	"loading_projects": {
+		"en": "Loading projects...",
+		"fr": "Chargement des projets...",
+	},
+	"loading_contact": {
+		"en": "Loading contact form...",
+		"fr": "Chargement du formulaire de contact...",
+	},
+	"filter_skills": {
+		"en": "Filter skills...",
+		"fr": "Filtrer les compétences...",
+	},
+	"professional_experience": {
+		"en": "Professional Experience",
+		"fr": "Expérience Professionnelle",
+	},
+	"education": {
+		"en": "Education",
+		"fr": "Éducation",
+	},
+	"personal_projects": {
+		"en": "Personal Projects",
+		"fr": "Projets Personnels",
+	},
+	"skills": {
+		"en": "Skills",
+		"fr": "Compétences",
+	},
+	"contact_me": {
+		"en": "Contact Me",
+		"fr": "Contactez-Moi",
+	},
+	"experience": {
+		"en": "Experience",
+		"fr": "Expérience",
+	},
+	"projects": {
+		"en": "Projects",
+		"fr": "Projets",
+	},
+	"contact": {
+		"en": "Contact",
+		"fr": "Contact",
+	},
+	"message_sent": {
+		"en": "Message sent successfully!",
+		"fr": "Message envoyé avec succès !",
+	},
+	"failed_send": {
+		"en": "Failed to send email",
+		"fr": "Échec de l'envoi de l'email",
+	},
+	"all_fields_required": {
+		"en": "All fields are required",
+		"fr": "Tous les champs sont requis",
+	},
+	"loading_stats": {
+		"en": "Loading stats...",
+		"fr": "Chargement des statistiques...",
+	},
+	"view_on_github": {
+		"en": "View on GitHub",
+		"fr": "Voir sur GitHub",
+	},
+}
+
+// Helper to get translation
+func getTranslation(key, lang string) string {
+	if val, ok := translations[key][lang]; ok {
+		return val
+	}
+	return translations[key]["en"] // Fallback to English
+}
+
+// Helper to detect language from query param or cookie
+func detectLanguage(r *http.Request) string {
+	lang := r.URL.Query().Get("lang")
+	if lang == "" {
+		if cookie, err := r.Cookie("language"); err == nil {
+			lang = cookie.Value
+		}
+	}
+	if lang != "en" && lang != "fr" {
+		lang = "en" // Default
+	}
+	return lang
+}
+
 func main() {
 	// Create a new Chi router
 	router := chi.NewRouter()
@@ -34,13 +148,9 @@ func main() {
 	router.Handle("/manifest.json", http.FileServer(http.Dir(".")))
 	router.Handle("/sw.js", http.FileServer(http.Dir(".")))
 
-	// Load data from JSON into structs
-	experienceData := loadExperienceData("data/experience.json")
-	educationData := loadEducationData("data/education.json")
-	projectsData := loadProjectsData("data/projects.json")
-
 	// Handle root route
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		lang := detectLanguage(r)
 		data := templates.IndexData{
 			Skills: []string{
 				"Go Programming", "Python", "C", "React",
@@ -52,51 +162,67 @@ func main() {
 				"Cross-Language Integration", "Panic Recovery & Error Handling", "File-Based Persistence",
 				"Desktop Application Development", "Markdown Parsing for UI", "JSON Data Handling", "Logging & Debugging",
 			},
+			Translations: translations,
+			Language:    lang,
 		}
 		templates.IndexTemplate(data).Render(r.Context(), w)
 	})
 
 	// Handle experience section
 	router.Get("/cv/experience", func(w http.ResponseWriter, r *http.Request) {
+		lang := detectLanguage(r)
 		w.Header().Set("Content-Type", "text/html")
-		templates.ExperienceTemplate(experienceData).Render(r.Context(), w)
+		data := loadExperienceData(lang)
+		data.Language = lang
+		data.Translations = translations
+		templates.ExperienceTemplate(data).Render(r.Context(), w)
 	})
 
 	// Handle education section
 	router.Get("/cv/education", func(w http.ResponseWriter, r *http.Request) {
+		lang := detectLanguage(r)
 		w.Header().Set("Content-Type", "text/html")
-		templates.EducationTemplate(educationData).Render(r.Context(), w)
+		data := loadEducationData(lang)
+		data.Language = lang
+		data.Translations = translations
+		templates.EducationTemplate(data).Render(r.Context(), w)
 	})
 
 	// Handle projects section
 	router.Get("/cv/projects", func(w http.ResponseWriter, r *http.Request) {
+		lang := detectLanguage(r)
 		w.Header().Set("Content-Type", "text/html")
-		templates.ProjectsTemplate(projectsData).Render(r.Context(), w)
+		data := loadProjectsData(lang)
+		data.Language = lang
+		data.Translations = translations
+		templates.ProjectsTemplate(data).Render(r.Context(), w)
 	})
 
 	// Handle contact form
 	router.Get("/contact", func(w http.ResponseWriter, r *http.Request) {
+		lang := detectLanguage(r)
 		w.Header().Set("Content-Type", "text/html")
-		templates.ContactTemplate().Render(r.Context(), w)
+		templates.ContactTemplate(lang, translations).Render(r.Context(), w)
 	})
 
 	// New: Handle contact form submission
 	router.Post("/contact-submit", func(w http.ResponseWriter, r *http.Request) {
+		lang := detectLanguage(r)
 		name := r.FormValue("name")
 		email := r.FormValue("email")
 		message := r.FormValue("message")
 		if name == "" || email == "" || message == "" {
-			http.Error(w, "All fields are required", http.StatusBadRequest)
+			http.Error(w, getTranslation("all_fields_required", lang), http.StatusBadRequest)
 			return
 		}
 		// Send email (configure SMTP)
 		err := sendEmail(name, email, message)
 		if err != nil {
-			http.Error(w, "Failed to send email", http.StatusInternalServerError)
+			http.Error(w, getTranslation("failed_send", lang), http.StatusInternalServerError)
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Message sent successfully!"))
+		w.Write([]byte(getTranslation("message_sent", lang)))
 	})
 
 	// New: Handle GitHub stats
@@ -156,39 +282,66 @@ func main() {
 	}
 }
 
-func loadExperienceData(filename string) templates.ExperienceData {
+func loadExperienceData(lang string) templates.ExperienceData {
+	filename := fmt.Sprintf("data/experience_%s.json", lang)
 	file, err := os.Open(filename)
 	if err != nil {
-		log.Printf("Error loading %s: %v", filename, err)
-		return templates.ExperienceData{}
+		log.Printf("Error loading %s: %v, falling back to English", filename, err)
+		filename = "data/experience_en.json"
+		file, err = os.Open(filename)
+		if err != nil {
+			log.Printf("Error loading fallback %s: %v", filename, err)
+			return templates.ExperienceData{}
+		}
 	}
 	defer file.Close()
 	var data templates.ExperienceData
-	json.NewDecoder(file).Decode(&data)
+	if err := json.NewDecoder(file).Decode(&data); err != nil {
+		log.Printf("Error decoding %s: %v", filename, err)
+		return templates.ExperienceData{}
+	}
 	return data
 }
 
-func loadEducationData(filename string) templates.EducationData {
+func loadEducationData(lang string) templates.EducationData {
+	filename := fmt.Sprintf("data/education_%s.json", lang)
 	file, err := os.Open(filename)
 	if err != nil {
-		log.Printf("Error loading %s: %v", filename, err)
-		return templates.EducationData{}
+		log.Printf("Error loading %s: %v, falling back to English", filename, err)
+		filename = "data/education_en.json"
+		file, err = os.Open(filename)
+		if err != nil {
+			log.Printf("Error loading fallback %s: %v", filename, err)
+			return templates.EducationData{}
+		}
 	}
 	defer file.Close()
 	var data templates.EducationData
-	json.NewDecoder(file).Decode(&data)
+	if err := json.NewDecoder(file).Decode(&data); err != nil {
+		log.Printf("Error decoding %s: %v", filename, err)
+		return templates.EducationData{}
+	}
 	return data
 }
 
-func loadProjectsData(filename string) templates.ProjectsData {
+func loadProjectsData(lang string) templates.ProjectsData {
+	filename := fmt.Sprintf("data/projects_%s.json", lang)
 	file, err := os.Open(filename)
 	if err != nil {
-		log.Printf("Error loading %s: %v", filename, err)
-		return templates.ProjectsData{}
+		log.Printf("Error loading %s: %v, falling back to English", filename, err)
+		filename = "data/projects_en.json"
+		file, err = os.Open(filename)
+		if err != nil {
+			log.Printf("Error loading fallback %s: %v", filename, err)
+			return templates.ProjectsData{}
+		}
 	}
 	defer file.Close()
 	var data templates.ProjectsData
-	json.NewDecoder(file).Decode(&data)
+	if err := json.NewDecoder(file).Decode(&data); err != nil {
+		log.Printf("Error decoding %s: %v", filename, err)
+		return templates.ProjectsData{}
+	}
 	return data
 }
 

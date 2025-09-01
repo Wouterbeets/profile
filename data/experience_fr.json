@@ -1,0 +1,58 @@
+{
+	"ExperienceItems": [
+		{
+			"Title": "Directeur Technique",
+			"Company": "La Clinique E-Santé",
+			"Period": "Février 2023 - Janvier 2025, Paris, France",
+			"Description": [
+				"Dirigé la vision technique et l'architecture d'une plateforme de thérapie en santé mentale en ligne offrant un accès 24/7 via message, audio et vidéo, intégrant l'intégration LLM et la transcription audio en temps réel pour des consultations améliorées",
+				"Supervisé le développement et la maintenance d'applications mobiles et web, assurant des consultations sécurisées et remboursables et une communication fluide entre patients et psychologues",
+				"Géré une équipe de développeurs pour implémenter des fonctionnalités de gestion de l'anxiété, thérapies brèves (par exemple, TCC, EMDR, hypnose) et solutions intégratives de santé mentale",
+				"Géré l'évolutivité de la plateforme et la conformité à la confidentialité pour les services e-santé, contribuant à la mission de l'entreprise de rendre la santé mentale accessible jusqu'à sa fermeture"
+			]
+		},
+		{
+			"Title": "Ingénieur Principal de Plateforme de Paiement",
+			"Company": "leboncoin",
+			"Period": "2022 - Janvier 2023, Paris, France",
+			"Description": [
+				"Défini la vision de l'architecture technique pour 4 équipes, en mettant l'accent sur la programmation orientée événements et l'architecture de microservices"
+			]
+		},
+		{
+			"Title": "Développeur Principal",
+			"Company": "leboncoin",
+			"Period": "2019 - 2022, Paris, France",
+			"Description": [
+				"Fournit un soutien organisationnel et technique à 100 développeurs, en tirant parti de la programmation orientée événements et de l'architecture de microservices"
+			]
+		},
+		{
+			"Title": "Développeur Backend",
+			"Company": "leboncoin",
+			"Period": "2017 - 2019, Paris, France",
+			"Description": [
+				"Migré la base de code legacy vers une architecture de microservices, utilisant la programmation orientée événements pour des solutions évolutives",
+				"Intégré de nouveaux fournisseurs de services de paiement"
+			]
+		},
+		{
+			"Title": "Développeur Fullstack",
+			"Company": "Artefact",
+			"Period": "2015 - 2017, Paris, France",
+			"Description": [
+				"Géré un outil d'analyse de big data",
+				"Servi en tant que Scrum Master pour l'équipe produit"
+			]
+		},
+		{
+			"Title": "Entrepreneur de Service de Cuisine à Domicile",
+			"Company": "Thuis aan Tafel - Pays-Bas",
+			"Period": "2012 - 2015, Pays-Bas",
+			"Description": [
+				"Créé et maintenu une solution logicielle utilisant MS ACCESS",
+				"Géré la comptabilité et la responsabilité financière"
+			]
+		}
+	]
+}
