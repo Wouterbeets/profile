@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -39,6 +40,10 @@ func detectLanguage(r *http.Request) string {
 }
 
 func main() {
+	// Parse command-line flags
+	port := flag.String("p", "33333", "Port to run the server on")
+	flag.Parse()
+
 	// Create a new Chi router
 	router := chi.NewRouter()
 
@@ -176,11 +181,11 @@ func main() {
 
 	// Create server
 	server := &http.Server{
-		Addr:    ":33333",
+		Addr:    ":" + *port,
 		Handler: router,
 	}
 
-	log.Printf("Starting server on port 33333...")
+	log.Printf("Starting server on port %s...", *port)
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
