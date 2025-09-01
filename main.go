@@ -15,42 +15,6 @@ import (
 	"testserver/templates"
 )
 
-// Define structs for data
-type ExperienceItem struct {
-	Title       string   `json:"Title"`
-	Company     string   `json:"Company"`
-	Period      string   `json:"Period"`
-	Description []string `json:"Description"`
-}
-
-type ExperienceData struct {
-	ExperienceItems []ExperienceItem `json:"ExperienceItems"`
-}
-
-type EducationItem struct {
-	Title       string `json:"Title"`
-	Institution string `json:"Institution"`
-	Period      string `json:"Period"`
-}
-
-type EducationData struct {
-	EducationItems []EducationItem `json:"EducationItems"`
-}
-
-type ProjectItem struct {
-	Title       string `json:"Title"`
-	Description string `json:"Description"`
-	GitHubLink  string `json:"GitHubLink"`
-}
-
-type ProjectsData struct {
-	ProjectItems []ProjectItem `json:"ProjectItems"`
-}
-
-type IndexData struct {
-	Skills []string `json:"Skills"`
-}
-
 type GitHubRepo struct {
 	Stars int `json:"stargazers_count"`
 	Forks int `json:"forks_count"`
@@ -77,7 +41,7 @@ func main() {
 
 	// Handle root route
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		data := IndexData{
+		data := templates.IndexData{
 			Skills: []string{
 				"Go Programming", "Python", "C", "React",
 				"Microservices Architecture", "Cloud Technologies",
@@ -178,38 +142,38 @@ func main() {
 	}
 }
 
-func loadExperienceData(filename string) ExperienceData {
+func loadExperienceData(filename string) templates.ExperienceData {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Printf("Error loading %s: %v", filename, err)
-		return ExperienceData{}
+		return templates.ExperienceData{}
 	}
 	defer file.Close()
-	var data ExperienceData
+	var data templates.ExperienceData
 	json.NewDecoder(file).Decode(&data)
 	return data
 }
 
-func loadEducationData(filename string) EducationData {
+func loadEducationData(filename string) templates.EducationData {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Printf("Error loading %s: %v", filename, err)
-		return EducationData{}
+		return templates.EducationData{}
 	}
 	defer file.Close()
-	var data EducationData
+	var data templates.EducationData
 	json.NewDecoder(file).Decode(&data)
 	return data
 }
 
-func loadProjectsData(filename string) ProjectsData {
+func loadProjectsData(filename string) templates.ProjectsData {
 	file, err := os.Open(filename)
 	if err != nil {
 		log.Printf("Error loading %s: %v", filename, err)
-		return ProjectsData{}
+		return templates.ProjectsData{}
 	}
 	defer file.Close()
-	var data ProjectsData
+	var data templates.ProjectsData
 	json.NewDecoder(file).Decode(&data)
 	return data
 }
