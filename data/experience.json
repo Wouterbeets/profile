@@ -5,7 +5,7 @@
 			"Company": "La Clinique E-Santé",
 			"Period": "February 2023 - January 2025, Paris, France",
 			"Description": [
-				"Led the technical vision and architecture for an online mental health therapy platform offering 24/7 access via message, audio, and video",
+				"Led the technical vision and architecture for an online mental health therapy platform offering 24/7 access via message, audio, and video, incorporating LLM Integration and Real-Time Audio Transcription for enhanced consultations",
 				"Oversaw development and maintenance of mobile and web applications, ensuring secure, reimbursable consultations and seamless patient-psychologist communication",
 				"Managed a team of developers to implement features for anxiety management, brief therapies (e.g., CBT, EMDR, hypnosis), and integrative mental health solutions",
 				"Handled platform scalability and privacy compliance for e-health services, contributing to the company's mission of making mental health accessible until its closure"
@@ -16,7 +16,7 @@
 			"Company": "leboncoin",
 			"Period": "2022 - January 2023, Paris, France",
 			"Description": [
-				"Defined the technical architecture vision for 4 teams"
+				"Defined the technical architecture vision for 4 teams, emphasizing Event-Driven Programming and Microservices Architecture"
 			]
 		},
 		{
@@ -24,7 +24,7 @@
 			"Company": "leboncoin",
 			"Period": "2019 - 2022, Paris, France",
 			"Description": [
-				"Provided organizational and technical support to 100 developers"
+				"Provided organizational and technical support to 100 developers, leveraging Event-Driven Programming and Microservices Architecture"
 			]
 		},
 		{
@@ -32,7 +32,7 @@
 			"Company": "leboncoin",
 			"Period": "2017 - 2019, Paris, France",
 			"Description": [
-				"Migrated the legacy codebase to a microservices architecture",
+				"Migrated the legacy codebase to a microservices architecture, utilizing Event-Driven Programming for scalable solutions",
 				"Integrated new payment service providers"
 			]
 		},

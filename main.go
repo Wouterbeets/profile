@@ -47,6 +47,10 @@ func main() {
 				"Microservices Architecture", "Cloud Technologies",
 				"DevOps Practices", "Database Design", "System Design",
 				"Leadership", "Team Management", "Technical Vision",
+				"Concurrent Programming in Go", "Fyne Framework", "Event-Driven Programming",
+				"LLM Integration with Ollama", "Real-Time Audio Transcription", "Event Sourcing & CQRS", "Plugin Architecture",
+				"Cross-Language Integration", "Panic Recovery & Error Handling", "File-Based Persistence",
+				"Desktop Application Development", "Markdown Parsing for UI", "JSON Data Handling", "Logging & Debugging",
 			},
 		}
 		templates.IndexTemplate(data).Render(r.Context(), w)
@@ -123,6 +127,10 @@ func main() {
 			"Microservices Architecture", "Cloud Technologies",
 			"DevOps Practices", "Database Design", "System Design",
 			"Leadership", "Team Management", "Technical Vision",
+			"Concurrent Programming in Go", "Fyne Framework", "Event-Driven Programming",
+			"LLM Integration with Ollama", "Real-Time Audio Transcription", "Event Sourcing & CQRS", "Plugin Architecture",
+			"Cross-Language Integration", "Panic Recovery & Error Handling", "File-Based Persistence",
+			"Desktop Application Development", "Markdown Parsing for UI", "JSON Data Handling", "Logging & Debugging",
 		}
 		filtered := []string{}
 		for _, skill := range allSkills {

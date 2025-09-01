@@ -14,6 +14,11 @@
 			"Title": "Data Analytics Tool",
 			"Description": "A tool for big data analytics built with Python and React, featuring interactive dashboards.",
 			"GitHubLink": "https://github.com/user/analytics-tool"
+		},
+		{
+			"Title": "MindPalace AI Assistant",
+			"Description": "Developed a desktop AI assistant in Go using event sourcing, integrating real-time audio transcription (PortAudio, Python), LLM interactions (Ollama API with 131k token contexts), and a Fyne-based GUI with custom themes and Kanban boards. Implemented plugin architecture for extensibility, with a task manager plugin supporting task CRUD operations.",
+			"GitHubLink": "https://github.com/user/mindpalace"
 		}
 	]
 }
