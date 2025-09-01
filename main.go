@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"embed"
 	"encoding/json"
 	"flag"
@@ -62,13 +63,19 @@ func main() {
 			return
 		}
 		defer file.Close()
+		content, err := io.ReadAll(file)
+		if err != nil {
+			http.Error(w, "Error reading file", http.StatusInternalServerError)
+			return
+		}
+		reader := bytes.NewReader(content)
 		// Set Content-Type based on extension
 		if strings.HasSuffix(path, ".css") {
 			w.Header().Set("Content-Type", "text/css")
 		} else if strings.HasSuffix(path, ".js") {
 			w.Header().Set("Content-Type", "application/javascript")
 		}
-		http.ServeContent(w, r, path, time.Time{}, file)
+		http.ServeContent(w, r, path, time.Time{}, reader)
 	})
 
 	router.HandleFunc("/manifest.json", func(w http.ResponseWriter, r *http.Request) {
@@ -78,8 +85,14 @@ func main() {
 			return
 		}
 		defer file.Close()
+		content, err := io.ReadAll(file)
+		if err != nil {
+			http.Error(w, "Error reading file", http.StatusInternalServerError)
+			return
+		}
+		reader := bytes.NewReader(content)
 		w.Header().Set("Content-Type", "application/json")
-		http.ServeContent(w, r, "manifest.json", time.Time{}, file)
+		http.ServeContent(w, r, "manifest.json", time.Time{}, reader)
 	})
 
 	router.HandleFunc("/sw.js", func(w http.ResponseWriter, r *http.Request) {
@@ -89,8 +102,14 @@ func main() {
 			return
 		}
 		defer file.Close()
+		content, err := io.ReadAll(file)
+		if err != nil {
+			http.Error(w, "Error reading file", http.StatusInternalServerError)
+			return
+		}
+		reader := bytes.NewReader(content)
 		w.Header().Set("Content-Type", "application/javascript")
-		http.ServeContent(w, r, "sw.js", time.Time{}, file)
+		http.ServeContent(w, r, "sw.js", time.Time{}, reader)
 	})
 
 	// Handle root route
