@@ -70,6 +70,12 @@ func main() {
 		templates.ProjectsTemplate(projectsData).Render(r.Context(), w)
 	})
 
+	// Handle contact form
+	router.Get("/contact", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		templates.ContactTemplate().Render(r.Context(), w)
+	})
+
 	// New: Handle contact form submission
 	router.Post("/contact-submit", func(w http.ResponseWriter, r *http.Request) {
 		name := r.FormValue("name")
