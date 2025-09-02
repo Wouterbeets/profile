@@ -1,7 +1,7 @@
 package templates
 
 import "fmt"
-import "github.com/a-h/templ"
+import templpkg "github.com/a-h/templ"
 
 templ ExperienceTemplate(data ExperienceData) {
 	<div class="timeline"> for i, item := range data.ExperienceItems {
@@ -29,5 +29,5 @@ templ ExperienceDetailTemplate(item ExperienceItem, lang string, id int) {
 	<ul class="mt-4 space-y-2"> for _, desc := range item.Description {
 		<li class="text-gray-700 dark:text-gray-200">{ desc }</li>
 	} </ul>
-	<p class="collapse-text text-indigo-500 cursor-pointer mt-4" onclick={ templ.Script(fmt.Sprintf("document.getElementById('detail-%d').innerHTML = '';", id)) }>Click to collapse</p>
+	<p class="collapse-text text-indigo-500 cursor-pointer mt-4" onclick={ templpkg.Script(fmt.Sprintf("document.getElementById('detail-%d').innerHTML = '';", id)) }>Click to collapse</p>
 }
