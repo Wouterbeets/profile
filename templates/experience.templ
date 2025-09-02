@@ -28,8 +28,6 @@ templ ExperienceTemplate(data ExperienceData) {
 }
 
 templ ExperienceDetailTemplate(item ExperienceItem, lang string, id int) {
-	<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
-	<span class="company text-lg text-gray-600 dark:text-gray-300">{ item.Company }</span>
 	<ul class="mt-4 space-y-2">
 		for _, desc := range item.Description {
 			<li class="text-gray-700 dark:text-gray-200">{ desc }</li>
