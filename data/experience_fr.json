@@ -1,30 +1,32 @@
 {
 	"ExperienceItems": [
 		{
-			"Title": "Directeur Technique",
+			"Title": "Directeur Technique (CTO)",
 			"Company": "La Clinique E-Santé",
-			"Period": "Février 2023 - Janvier 2025, Paris, France",
+			"Period": "2022 - 2024, Paris, France",
 			"Description": [
-				"Dirigé la vision technique et l'architecture d'une plateforme de thérapie en santé mentale en ligne offrant un accès 24/7 via message, audio et vidéo, intégrant l'intégration LLM et la transcription audio en temps réel pour des consultations améliorées",
-				"Supervisé le développement et la maintenance d'applications mobiles et web, assurant des consultations sécurisées et remboursables et une communication fluide entre patients et psychologues",
-				"Géré une équipe de développeurs pour implémenter des fonctionnalités de gestion de l'anxiété, gestion de calendrier et solutions intégratives de santé mentale",
-				"Géré l'évolutivité de la plateforme et la conformité à la confidentialité pour les services e-santé, contribuant à la mission de l'entreprise de rendre la santé mentale accessible jusqu'à sa fermeture"
+				"Leadership Stratégique et Développement de Produit : Dirigé le développement et le lancement d'applications mobiles pour iOS et Android, formant la plateforme principale pour les e-consultations et la gestion des patients.",
+				"Systèmes de Paiement et Fonctionnalités d'E-Consultation : Dirigé l'intégration de Stripe pour optimiser les flux de paiement, supervisant la gestion des abonnements, la facturation et les systèmes de paiement.",
+				"Approvisionnement d'Événements et Conception Axée sur le Domaine : Créé un cadre d'approvisionnement d'événements en Golang avec une expertise approfondie en programmation orientée domaine. Géré l'ensemble de la pile technologique de bout en bout, y compris l'infrastructure, le déploiement, la gestion cloud et l'optimisation des coûts.",
+				"Transformation Agile et Culture d'Entreprise : Établi des cycles de développement agile, améliorant l'efficacité et la responsabilité au sein d'une équipe de 20 personnes. Promu une culture d'entreprise lean axée sur la planification des sprints, l'amélioration continue et la livraison de projets orientés résultats.",
+				"Améliorations des Plateformes Patient et Thérapeute : Supervisé le développement d'un tableau de bord patient, d'outils de communication pour les thérapeutes, de questionnaires de santé, et d'un système de réservation avec notifications par email et algorithmes de correspondance des thérapeutes.",
+				"Migration Complète de Plateforme : Migré avec succès l'ensemble de la plateforme d'une configuration PHP personnalisée non maintenable sans contrôle de source vers un backend Golang robuste avec un frontend React. Cette transition complexe couvrait les interfaces patient, psychologue et back-office, maintenant la fonctionnalité complète pour des milliers d'utilisateurs actifs. Le nouveau système est plus maintenable, sécurisé et a résolu les problèmes de confidentialité des utilisateurs précédents."
 			]
 		},
 		{
-			"Title": "Ingénieur Principal de Plateforme de Paiement",
+			"Title": "Ingénieur Principal - Plateforme de Paiement",
 			"Company": "leboncoin",
-			"Period": "2022 - Janvier 2023, Paris, France",
+			"Period": "2021 - 2022, Paris, France",
 			"Description": [
-				"Défini la vision de l'architecture technique pour 4 équipes, en mettant l'accent sur la programmation orientée événements et l'architecture de microservices"
+				"Leadership Architectural dans les Systèmes de Paiement : Servi en tant qu'architecte principal et concepteur du système de paiement peer-to-peer (P2P) utilisé par leboncoin. Dirigé la vision technique, assurant l'évolutivité, la sécurité et la fiabilité, améliorant l'infrastructure de paiement globale de la plateforme."
 			]
 		},
 		{
 			"Title": "Développeur Principal",
 			"Company": "leboncoin",
-			"Period": "2019 - 2022, Paris, France",
+			"Period": "2019 - 2021, Paris, France",
 			"Description": [
-				"Fournit un soutien organisationnel et technique à 100 développeurs, en tirant parti de la programmation orientée événements et de l'architecture de microservices"
+				"Alignement Culturel et Technique Entre les Équipes : Aligné 100 développeurs backend dans 20 équipes, en se concentrant sur l'intégration de la culture et des valeurs de l'entreprise dans le code. Établi des principes backend de base—harmonie, robustesse, vivacité et évolutivité—pour assurer un code cohérent et compréhensible. Organisé et dirigé des rencontres bihebdomadaires pour tous les développeurs backend, favorisant des discussions ouvertes, la construction de consensus et la prise de décision stratégique sur les pratiques de codage."
 			]
 		},
 		{
@@ -32,8 +34,7 @@
 			"Company": "leboncoin",
 			"Period": "2017 - 2019, Paris, France",
 			"Description": [
-				"Migré la base de code legacy vers une architecture de microservices, utilisant la programmation orientée événements pour des solutions évolutives",
-				"Intégré de nouveaux fournisseurs de services de paiement"
+				"Migration vers un Système de Paiement Distribué et Axé sur les Événements : Transitionné avec succès d'une base de données centralisée d'historique de paiement avec plus de 1,4 milliard de lignes—précédemment accédée par 20 équipes—vers un système de paiement robuste basé sur REST API et axé sur les événements. Conçu pour intégrer plusieurs fournisseurs de paiement, y compris Adyen, Paybox et Stripe. Utilisé Kafka pour mettre à jour les résultats de paiement entre les équipes, améliorant l'évolutivité, la fiabilité et la maintenabilité."
 			]
 		},
 		{
@@ -41,8 +42,7 @@
 			"Company": "Artefact",
 			"Period": "2015 - 2017, Paris, France",
 			"Description": [
-				"Géré un outil d'analyse de big data",
-				"Servi en tant que Scrum Master pour l'équipe produit"
+				"Développement d'une Plateforme d'Insights en Temps Réel pour la Stratégie Marketing : Développé une plateforme d'insights de données conçue pour les décideurs marketing, analysant les données de navigation de sites de vendeurs majeurs comme Samsung. Appliqué des algorithmes d'apprentissage automatique tels que le clustering K-means pour fournir des insights en temps réel sur le comportement des utilisateurs, permettant la prise de décision stratégique pour les équipes marketing."
 			]
 		},
 		{
