@@ -7,7 +7,7 @@ templ ExperienceTemplate(data ExperienceData) {
 		<div class="timeline-item">
 			<div class="timeline-dot"></div>
 			<div class="timeline-content">
-				<div class="summary" hx-get={ fmt.Sprintf("/cv/experience/detail/%d", i) } hx-target={ fmt.Sprintf("#detail-%d", i) } hx-swap="innerHTML">
+				<div class="summary" hx-get={ fmt.Sprintf("/cv/experience/detail/%d", i) } hx-target={ fmt.Sprintf("#detail-%d", i) } hx-swap="innerHTML" hx-on:htmx:afterRequest={ fmt.Sprintf("document.getElementById('detail-%d').classList.remove('hidden')", i) }>
 					<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
 					<span class="company text-lg text-gray-600 dark:text-gray-300">{ item.Company }</span>
 					<span class="period text-sm text-gray-500">{ item.Period }</span>
