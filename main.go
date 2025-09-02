@@ -156,7 +156,7 @@ func main() {
 			return
 		}
 		item := data.ExperienceItems[id]
-		templates.ExperienceDetailTemplate(item, lang).Render(r.Context(), w)
+		templates.ExperienceDetailTemplate(item, lang, id).Render(r.Context(), w)
 	})
 
 	// Handle education section
