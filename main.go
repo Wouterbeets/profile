@@ -122,6 +122,7 @@ func main() {
 				"Dutch (Native)", "English (Fluent)", "French (Fluent)",
 				"AI Integration", "Privacy-Conscious AI", "Event Sourcing", "Domain-Driven Design",
 			},
+			Profile: loadProfileData(lang),
 			Translations: templates.Translations,
 			Language:    lang,
 		}
@@ -297,6 +298,27 @@ func loadProjectsData(lang string) templates.ProjectsData {
 	if err := json.NewDecoder(file).Decode(&data); err != nil {
 		log.Printf("Error decoding %s: %v", filename, err)
 		return templates.ProjectsData{}
+	}
+	return data
+}
+
+func loadProfileData(lang string) templates.ProfileData {
+	filename := fmt.Sprintf("data/profile_%s.json", lang)
+	file, err := embeddedFS.Open(filename)
+	if err != nil {
+		log.Printf("Error loading %s: %v, falling back to English", filename, err)
+		filename = "data/profile_en.json"
+		file, err = embeddedFS.Open(filename)
+		if err != nil {
+			log.Printf("Error loading fallback %s: %v", filename, err)
+			return templates.ProfileData{}
+		}
+	}
+	defer file.Close()
+	var data templates.ProfileData
+	if err := json.NewDecoder(file).Decode(&data); err != nil {
+		log.Printf("Error decoding %s: %v", filename, err)
+		return templates.ProfileData{}
 	}
 	return data
 }

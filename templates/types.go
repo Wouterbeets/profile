@@ -38,8 +38,16 @@ type ProjectsData struct {
 	Translations map[string]map[string]string `json:"-"`
 }
 
+type ProfileData struct {
+	Title    string `json:"Title"`
+	Text     string `json:"Text"`
+	Language string `json:"-"`
+	Translations map[string]map[string]string `json:"-"`
+}
+
 type IndexData struct {
 	Skills       []string                      `json:"Skills"`
+	Profile      ProfileData                   `json:"Profile"`
 	Language     string                        `json:"-"`
 	Translations map[string]map[string]string `json:"-"`
 }
