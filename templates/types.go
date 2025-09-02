@@ -6,6 +6,7 @@ type ExperienceItem struct {
 	Company     string   `json:"Company"`
 	Period      string   `json:"Period"`
 	Description []string `json:"Description"`
+	Summary     string   `json:"Summary"`
 }
 
 type ExperienceData struct {

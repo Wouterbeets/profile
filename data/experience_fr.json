@@ -4,6 +4,7 @@
 			"Title": "Directeur Technique (CTO)",
 			"Company": "La Clinique E-Santé",
 			"Period": "2022 - 2024, Paris, France",
+			"Summary": "Dirigé le développement stratégique de produits, les intégrations de paiement et la migration complète de plateforme vers Golang/React, améliorant l'évolutivité et la sécurité.",
 			"Description": [
 				"Leadership Stratégique et Développement de Produit : Dirigé le développement et le lancement d'applications mobiles pour iOS et Android, formant la plateforme principale pour les e-consultations et la gestion des patients.",
 				"Systèmes de Paiement et Fonctionnalités d'E-Consultation : Dirigé l'intégration de Stripe pour optimiser les flux de paiement, supervisant la gestion des abonnements, la facturation et les systèmes de paiement.",
@@ -17,6 +18,7 @@
 			"Title": "Ingénieur Principal - Plateforme de Paiement",
 			"Company": "leboncoin",
 			"Period": "2021 - 2022, Paris, France",
+			"Summary": "Architecturé et conçu le système de paiement P2P, assurant l'évolutivité, la sécurité et la fiabilité de la plateforme.",
 			"Description": [
 				"Leadership Architectural dans les Systèmes de Paiement : Servi en tant qu'architecte principal et concepteur du système de paiement peer-to-peer (P2P) utilisé par leboncoin. Dirigé la vision technique, assurant l'évolutivité, la sécurité et la fiabilité, améliorant l'infrastructure de paiement globale de la plateforme."
 			]
@@ -25,6 +27,7 @@
 			"Title": "Développeur Principal",
 			"Company": "leboncoin",
 			"Period": "2019 - 2021, Paris, France",
+			"Summary": "Aligné 100 développeurs backend dans 20 équipes, établissant des principes de base et favorisant l'alignement culturel dans les pratiques de codage.",
 			"Description": [
 				"Alignement Culturel et Technique Entre les Équipes : Aligné 100 développeurs backend dans 20 équipes, en se concentrant sur l'intégration de la culture et des valeurs de l'entreprise dans le code. Établi des principes backend de base—harmonie, robustesse, vivacité et évolutivité—pour assurer un code cohérent et compréhensible. Organisé et dirigé des rencontres bihebdomadaires pour tous les développeurs backend, favorisant des discussions ouvertes, la construction de consensus et la prise de décision stratégique sur les pratiques de codage."
 			]
@@ -33,6 +36,7 @@
 			"Title": "Développeur Backend",
 			"Company": "leboncoin",
 			"Period": "2017 - 2019, Paris, France",
+			"Summary": "Migré vers un système de paiement distribué et axé sur les événements intégrant plusieurs fournisseurs, améliorant l'évolutivité et la fiabilité.",
 			"Description": [
 				"Migration vers un Système de Paiement Distribué et Axé sur les Événements : Transitionné avec succès d'une base de données centralisée d'historique de paiement avec plus de 1,4 milliard de lignes—précédemment accédée par 20 équipes—vers un système de paiement robuste basé sur REST API et axé sur les événements. Conçu pour intégrer plusieurs fournisseurs de paiement, y compris Adyen, Paybox et Stripe. Utilisé Kafka pour mettre à jour les résultats de paiement entre les équipes, améliorant l'évolutivité, la fiabilité et la maintenabilité."
 			]
@@ -41,6 +45,7 @@
 			"Title": "Développeur Fullstack",
 			"Company": "Artefact",
 			"Period": "2015 - 2017, Paris, France",
+			"Summary": "Développé une plateforme d'insights en temps réel utilisant des algorithmes ML pour la stratégie marketing et l'analyse du comportement des utilisateurs.",
 			"Description": [
 				"Développement d'une Plateforme d'Insights en Temps Réel pour la Stratégie Marketing : Développé une plateforme d'insights de données conçue pour les décideurs marketing, analysant les données de navigation de sites de vendeurs majeurs comme Samsung. Appliqué des algorithmes d'apprentissage automatique tels que le clustering K-means pour fournir des insights en temps réel sur le comportement des utilisateurs, permettant la prise de décision stratégique pour les équipes marketing."
 			]
@@ -49,6 +54,7 @@
 			"Title": "Entrepreneur de Service de Cuisine à Domicile",
 			"Company": "Thuis aan Tafel - Pays-Bas",
 			"Period": "2012 - 2015, Pays-Bas",
+			"Summary": "Créé une solution logicielle pour la comptabilité et géré les responsabilités financières dans l'entreprise de cuisine à domicile.",
 			"Description": [
 				"Créé et maintenu une solution logicielle utilisant MS ACCESS",
 				"Géré la comptabilité et la responsabilité financière"

@@ -4,6 +4,7 @@
 			"Title": "Chief Technology Officer (CTO)",
 			"Company": "La Clinique E-Santé",
 			"Period": "2022 - 2024, Paris, France",
+			"Summary": "Led strategic product development, payment integrations, and full platform migration to Golang/React, enhancing scalability and security.",
 			"Description": [
 				"Strategic Leadership and Product Development: Directed the development and launch of mobile applications for iOS and Android, forming the main platform for e-consultations and patient management.",
 				"Payment Systems and E-Consultation Features: Led the integration of Stripe to optimize payment flows, overseeing subscription management, invoicing, and payment systems.",
@@ -17,6 +18,7 @@
 			"Title": "Staff Engineer - Payment Platform",
 			"Company": "leboncoin",
 			"Period": "2021 - 2022, Paris, France",
+			"Summary": "Architected and designed the P2P payment system, ensuring scalability, security, and reliability for the platform.",
 			"Description": [
 				"Architectural Leadership in Payment Systems: Served as the principal architect and designer of the peer-to-peer (P2P) payment system utilized by leboncoin. Spearheaded the technical vision, ensuring scalability, security, and reliability, enhancing the overall payment infrastructure for the platform."
 			]
@@ -25,6 +27,7 @@
 			"Title": "Lead Developer",
 			"Company": "leboncoin",
 			"Period": "2019 - 2021, Paris, France",
+			"Summary": "Aligned 100 backend developers across teams, establishing core principles and fostering cultural alignment in coding practices.",
 			"Description": [
 				"Cultural and Technical Alignment Across Teams: Aligned 100 backend developers across 20 teams, focusing on embedding company culture and values into the codebase. Established core backend principles—harmony, robustness, vivacity, and evolutivity—to ensure coherent and comprehensible code. Organized and led bi-weekly meetups for all backend developers, fostering open discussions, consensus-building, and strategic decision-making on coding practices."
 			]
@@ -33,6 +36,7 @@
 			"Title": "Backend Developer",
 			"Company": "leboncoin",
 			"Period": "2017 - 2019, Paris, France",
+			"Summary": "Migrated to a distributed, event-driven payment system integrating multiple providers, improving scalability and reliability.",
 			"Description": [
 				"Migration to a Distributed, Event-Driven Payment System: Successfully transitioned from a centralized payment history database with over 1.4 billion rows—previously accessed by 20 teams—to a robust, REST API-based, event-driven payment system. Designed to integrate multiple payment providers, including Adyen, Paybox, and Stripe. Utilized Kafka to update payment results across teams, improving scalability, reliability, and maintainability."
 			]
@@ -41,6 +45,7 @@
 			"Title": "Fullstack Developer",
 			"Company": "Artefact",
 			"Period": "2015 - 2017, Paris, France",
+			"Summary": "Developed real-time insights platform using ML algorithms for marketing strategy and user behavior analysis.",
 			"Description": [
 				"Development of Real-Time Insights Platform for Marketing Strategy: Developed a data insights platform designed for marketing decision-makers, analyzing navigational data from major seller sites like Samsung. Applied machine learning algorithms such as K-means clustering to provide real-time insights into user behavior, enabling strategic decision-making for marketing teams."
 			]
@@ -49,6 +54,7 @@
 			"Title": "Home Cooking Service Entrepreneur",
 			"Company": "Thuis aan Tafel - Netherlands",
 			"Period": "2012 - 2015, Netherlands",
+			"Summary": "Created software solution for accounting and managed financial responsibilities in home cooking business.",
 			"Description": [
 				"Created and maintained a software solution using MS ACCESS",
 				"Managed accounting and financial responsibility"
