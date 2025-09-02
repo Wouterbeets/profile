@@ -9,6 +9,11 @@
 .timeline-item {
 	display: flex;
 	margin-bottom: 2rem;
+	transition: background-color 0.3s;
+}
+
+.timeline-item:hover {
+	background-color: rgba(79, 70, 229, 0.05);
 }
 
 .timeline-left {
@@ -60,12 +65,14 @@
 	@apply mt-4;
 }
 
-.expand-text {
-	@apply cursor-pointer;
+.expand-text, .collapse-text {
+	opacity: 0;
+	transition: opacity 0.3s;
 }
 
-.collapse-text {
-	@apply cursor-pointer;
+.timeline-item:hover .expand-text,
+.timeline-item:hover .collapse-text {
+	opacity: 1;
 }
 
 .fade-in {
