@@ -198,32 +198,6 @@ func main() {
 		templates.ProjectsTemplate(data).Render(r.Context(), w)
 	})
 
-	// Handle contact form
-	router.Get("/contact", func(w http.ResponseWriter, r *http.Request) {
-		lang := detectLanguage(r)
-		w.Header().Set("Content-Type", "text/html")
-		templates.ContactTemplate(lang, templates.Translations).Render(r.Context(), w)
-	})
-
-	// New: Handle contact form submission
-	router.Post("/contact-submit", func(w http.ResponseWriter, r *http.Request) {
-		lang := detectLanguage(r)
-		name := r.FormValue("name")
-		email := r.FormValue("email")
-		message := r.FormValue("message")
-		if name == "" || email == "" || message == "" {
-			http.Error(w, templates.GetTranslation("all_fields_required", lang), http.StatusBadRequest)
-			return
-		}
-		// Send email (configure SMTP)
-		err := sendEmail(name, email, message)
-		if err != nil {
-			http.Error(w, templates.GetTranslation("failed_send", lang), http.StatusInternalServerError)
-			return
-		}
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(templates.GetTranslation("message_sent", lang)))
-	})
 
 	// New: Handle GitHub stats
 	router.Get("/api/github-stats/{repo}", func(w http.ResponseWriter, r *http.Request) {

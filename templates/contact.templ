@@ -1,27 +1,11 @@
 package templates
 
 templ ContactTemplate(lang string, translations map[string]map[string]string) {
-	<div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg mb-8">
+	<div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
 		<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400 mb-4">Contact Information</h3>
 		<p class="text-gray-700 dark:text-gray-200 mb-2"><strong>Address:</strong> 2 avenue de Boran, 60260 Lamorlaye</p>
 		<p class="text-gray-700 dark:text-gray-200 mb-2"><strong>Phone:</strong> +33 7 69 52 77 59</p>
 		<p class="text-gray-700 dark:text-gray-200 mb-2"><strong>Email:</strong> <a href="mailto:beetswouter@gmail.com" class="text-indigo-600 dark:text-pink-400 hover:underline">beetswouter@gmail.com</a></p>
-		<p class="text-gray-700 dark:text-gray-200 mb-4"><strong>GitHub:</strong> <a href="https://github.com/wouterbeets" target="_blank" class="text-indigo-600 dark:text-pink-400 hover:underline">wouterbeets</a></p>
+		<p class="text-gray-700 dark:text-gray-200"><strong>GitHub:</strong> <a href="https://github.com/wouterbeets" target="_blank" class="text-indigo-600 dark:text-pink-400 hover:underline">wouterbeets</a></p>
 	</div>
-	<form hx-post="/contact-submit" hx-target="#contact-response" hx-swap="innerHTML" class="max-w-lg mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
-		<div class="mb-4">
-			<label for="name" class="block text-gray-700 dark:text-gray-200">{ GetTranslation("name_label", lang) }</label>
-			<input type="text" id="name" name="name" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300">
-		</div>
-		<div class="mb-4">
-			<label for="email" class="block text-gray-700 dark:text-gray-200">{ GetTranslation("email_label", lang) }</label>
-			<input type="email" id="email" name="email" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300">
-		</div>
-		<div class="mb-4">
-			<label for="message" class="block text-gray-700 dark:text-gray-200">{ GetTranslation("message_label", lang) }</label>
-			<textarea id="message" name="message" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300"></textarea>
-		</div>
-		<button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition">{ GetTranslation("send_message", lang) }</button>
-		<div id="contact-response" class="mt-4"></div>
-	</form>
 }

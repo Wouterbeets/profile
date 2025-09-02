@@ -81,9 +81,7 @@ templ IndexTemplate(data IndexData) {
 
 			<section id="contact" class="animate__animated animate__slideInUp">
 				<h2 class="text-4xl font-bold text-center mb-16 text-indigo-600 dark:text-pink-400">{ GetTranslation("contact_me", data.Language) }</h2>
-				<div hx-get="/contact" hx-target="#contact-content" hx-trigger="load" id="contact-content">
-					<p class="text-center">{ GetTranslation("loading_contact", data.Language) }</p>
-				</div>
+				@ContactTemplate(data.Language, data.Translations)
 			</section>
 		</main>
 
