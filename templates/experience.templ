@@ -1,5 +1,7 @@
 package templates
 
+import "fmt"
+
 templ ExperienceTemplate(data ExperienceData) {
 	<div class="timeline"> for i, item := range data.ExperienceItems {
 		<div class="timeline-item">
