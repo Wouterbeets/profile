@@ -8,7 +8,7 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func IndexTemplate(data map[string]interface{}) templ.Component {
+func IndexTemplate(data IndexData) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,30 +29,238 @@ func IndexTemplate(data map[string]interface{}) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>My CV Portfolio</title><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script><style>\n\t\t\tbody {\n\t\t\t\tfont-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n\t\t\t\tmax-width: 1000px;\n\t\t\t\tmargin: 0 auto;\n\t\t\t\tpadding: 20px;\n\t\t\t\tbackground: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n\t\t\t\tcolor: #333;\n\t\t\t\tmin-height: 100vh;\n\t\t\t}\n\t\t\t.container {\n\t\t\t\tbackground-color: white;\n\t\t\t\tpadding: 40px;\n\t\t\t\tborder-radius: 15px;\n\t\t\t\tbox-shadow: 0 10px 30px rgba(0,0,0,0.2);\n\t\t\t\tmargin-top: 20px;\n\t\t\t}\n\t\t\th1 {\n\t\t\t\tcolor: #2c3e50;\n\t\t\t\ttext-align: center;\n\t\t\t\tfont-size: 2.5em;\n\t\t\t\tmargin-bottom: 30px;\n\t\t\t\tposition: relative;\n\t\t\t}\n\t\t\th1:after {\n\t\t\t\tcontent: '';\n\t\t\t\tdisplay: block;\n\t\t\t\twidth: 100px;\n\t\t\t\theight: 4px;\n\t\t\t\tbackground: linear-gradient(45deg, #667eea, #764ba2);\n\t\t\t\tmargin: 10px auto;\n\t\t\t\tborder-radius: 2px;\n\t\t\t}\n\t\t\t.section {\n\t\t\t\tmargin: 30px 0;\n\t\t\t\tpadding: 25px;\n\t\t\t\tborder-radius: 10px;\n\t\t\t\tbackground: #f8f9fa;\n\t\t\t\tbox-shadow: 0 2px 10px rgba(0,0,0,0.05);\n\t\t\t}\n\t\t\t.section h2 {\n\t\t\t\tcolor: #2c3e50;\n\t\t\t\tmargin-top: 0;\n\t\t\t\tpadding-bottom: 10px;\n\t\t\t\tborder-bottom: 2px solid #667eea;\n\t\t\t}\n\t\t\t.experience-item, .education-item, .project-item {\n\t\t\t\tmargin: 20px 0;\n\t\t\t\tpadding: 20px;\n\t\t\t\tbackground-color: white;\n\t\t\t\tborder-radius: 8px;\n\t\t\t\tbox-shadow: 0 3px 10px rgba(0,0,0,0.08);\n\t\t\t\tborder-left: 4px solid #667eea;\n\t\t\t\ttransition: transform 0.3s ease, box-shadow 0.3s ease;\n\t\t\t}\n\t\t\t.experience-item:hover, .education-item:hover, .project-item:hover {\n\t\t\t\ttransform: translateY(-5px);\n\t\t\t\tbox-shadow: 0 5px 15px rgba(0,0,0,0.1);\n\t\t\t}\n\t\t\t.experience-item h3, .education-item h3, .project-item h3 {\n\t\t\t\tcolor: #2c3e50;\n\t\t\t\tmargin-top: 0;\n\t\t\t}\n\t\t\t.experience-item .company, .education-item .institution {\n\t\t\t\tfont-weight: bold;\n\t\t\t\tcolor: #667eea;\n\t\t\t\tdisplay: block;\n\t\t\t\tmargin-bottom: 8px;\n\t\t\t}\n\t\t\t.experience-item .period, .education-item .period {\n\t\t\t\tcolor: #7f8c8d;\n\t\t\t\tfont-size: 0.9em;\n\t\t\t\tmargin-bottom: 10px;\n\t\t\t}\n\t\t\t.project-item p {\n\t\t\t\tmargin: 10px 0;\n\t\t\t}\n\t\t\t.project-item a {\n\t\t\t\tcolor: #667eea;\n\t\t\t\ttext-decoration: none;\n\t\t\t\tfont-weight: bold;\n\t\t\t}\n\t\t\t.project-item a:hover {\n\t\t\t\ttext-decoration: underline;\n\t\t\t}\n\t\t\t.contact-info {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-wrap: wrap;\n\t\t\t\tgap: 20px;\n\t\t\t\tmargin-top: 20px;\n\t\t\t}\n\t\t\t.contact-item {\n\t\t\t\tflex: 1;\n\t\t\t\tmin-width: 200px;\n\t\t\t\tpadding: 15px;\n\t\t\t\tbackground-color: #f8f9fa;\n\t\t\t\tborder-radius: 8px;\n\t\t\t\ttext-align: center;\n\t\t\t\tbox-shadow: 0 2px 5px rgba(0,0,0,0.05);\n\t\t\t}\n\t\t\t.contact-item i {\n\t\t\t\tfont-size: 1.5em;\n\t\t\t\tmargin-bottom: 10px;\n\t\t\t\tcolor: #667eea;\n\t\t\t}\n\t\t\t.btn {\n\t\t\t\tbackground: linear-gradient(45deg, #667eea, #764ba2);\n\t\t\t\tcolor: white;\n\t\t\t\tpadding: 12px 25px;\n\t\t\t\tborder: none;\n\t\t\t\tborder-radius: 30px;\n\t\t\t\tcursor: pointer;\n\t\t\t\ttext-decoration: none;\n\t\t\t\tdisplay: inline-block;\n\t\t\t\tmargin: 10px 5px;\n\t\t\t\tfont-weight: bold;\n\t\t\t\ttransition: all 0.3s ease;\n\t\t\t\tbox-shadow: 0 4px 15px rgba(0,0,0,0.2);\n\t\t\t}\n\t\t\t.btn:hover {\n\t\t\t\ttransform: translateY(-3px);\n\t\t\t\tbox-shadow: 0 6px 20px rgba(0,0,0,0.25);\n\t\t\t}\n\t\t\t.skills-container {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-wrap: wrap;\n\t\t\t\tgap: 15px;\n\t\t\t\tmargin-top: 20px;\n\t\t\t}\n\t\t\t.skill-tag {\n\t\t\t\tbackground: linear-gradient(45deg, #667eea, #764ba2);\n\t\t\t\tcolor: white;\n\t\t\t\tpadding: 8px 15px;\n\t\t\t\tborder-radius: 20px;\n\t\t\t\tfont-size: 0.9em;\n\t\t\t}\n\t\t\t.profile-summary {\n\t\t\t\ttext-align: center;\n\t\t\t\tmargin: 30px 0;\n\t\t\t\tpadding: 20px;\n\t\t\t\tbackground: linear-gradient(45deg, #667eea, #764ba2);\n\t\t\t\tcolor: white;\n\t\t\t\tborder-radius: 10px;\n\t\t\t}\n\t\t\t.profile-summary p {\n\t\t\t\tfont-size: 1.1em;\n\t\t\t\tline-height: 1.6;\n\t\t\t}\n\t\t</style></head><body><div class=\"container\"><h1>Professional Portfolio</h1><div class=\"profile-summary\"><p>Passionate software engineer with expertise in building scalable web applications and leading technical teams.  Specialized in Go, full-stack development, and modern architecture patterns.</p></div><div class=\"section\" hx-get=\"/cv/experience\" hx-target=\"#experience-content\" hx-trigger=\"load\"><h2>Professional Experience</h2><div id=\"experience-content\"><!-- Experience will be loaded here via HTMX --><p>Loading experience...</p></div></div><div class=\"section\" hx-get=\"/cv/education\" hx-target=\"#education-content\" hx-trigger=\"load\"><h2>Education</h2><div id=\"education-content\"><!-- Education will be loaded here via HTMX --><p>Loading education...</p></div></div><div class=\"section\" hx-get=\"/cv/projects\" hx-target=\"#projects-content\" hx-trigger=\"load\"><h2>Personal Projects</h2><div id=\"projects-content\"><!-- Projects will be loaded here via HTMX --><p>Loading projects...</p></div></div><div class=\"section\"><h2>Contact Information</h2><div class=\"contact-info\"><div class=\"contact-item\"><i>📧</i><div><strong>Email:</strong> john.doe@example.com</div></div><div class=\"contact-item\"><i>📱</i><div><strong>Phone:</strong> +1 (123) 456-7890</div></div><div class=\"contact-item\"><i>📍</i><div><strong>Location:</strong> San Francisco, CA</div></div></div></div><div class=\"section\"><h2>Skills</h2><div class=\"skills-container\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Wouter Beets - Strategic AI Solution Architect Portfolio</title><meta name=\"description\" content=\"Professional portfolio of Wouter Beets, a Strategic AI Solution Architect specializing in Go, full-stack development, AI integration, and modern architecture.\"><meta property=\"og:title\" content=\"Wouter Beets - Strategic AI Solution Architect Portfolio\"><meta property=\"og:description\" content=\"Explore Wouter Beets' experience in strategic AI solutions, projects, and skills in software engineering and AI technologies.\"><meta property=\"og:image\" content=\"/static/og-image.png\"><link rel=\"manifest\" href=\"/manifest.json\"><script>window.tailwind = { config: { darkMode: 'class' } };</script><script src=\"https://cdn.tailwindcss.com\"></script><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css\"><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script><link rel=\"stylesheet\" href=\"/static/styles.css\"><script src=\"/static/app.js\"></script><script>document.documentElement.setAttribute('lang', '{ data.Language }');</script></head><body class=\"bg-gradient-to-br from-indigo-500 to-pink-500 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white min-h-screen font-sans\"><header class=\"relative overflow-hidden\"><div class=\"absolute top-4 right-4 z-30 flex space-x-2\"><button onclick=\"setLanguage('en')\" class=\"bg-white text-indigo-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition\">EN</button> <button onclick=\"setLanguage('fr')\" class=\"bg-white text-indigo-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition\">FR</button></div><div class=\"absolute inset-0 bg-gradient-to-r from-indigo-600 to-pink-600 opacity-20 animate-pulse\"></div><div class=\"container mx-auto px-4 py-20 relative z-10\"><div class=\"text-center animate__animated animate__fadeIn\"><h1 class=\"text-5xl md:text-7xl font-bold text-white mb-4\" id=\"typing-effect\"></h1><p class=\"text-xl md:text-2xl text-pink-200 mb-8\">Strategic AI Solution Architect | CTO | Technological Leader | Domain-Driven Design Expert</p><p class=\"text-lg text-white mb-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		for _, skill := range data["Skills"].([]string) {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<span class=\"skill-tag\">")
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(data.Profile.Text)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 35, Col: 59}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</p><a href=\"#experience\" class=\"text-white underline hover:text-pink-200\">Explore More</a></div></div></header><nav class=\"sticky top-0 bg-white dark:bg-gray-800 shadow-lg z-20\"><div class=\"container mx-auto px-4 py-4 flex justify-center space-x-8\"><a href=\"#experience\" class=\"text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("experience", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 43, Col: 145}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</a> <a href=\"#education\" class=\"text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("education", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 44, Col: 143}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</a> <a href=\"#projects\" class=\"text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("projects", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 45, Col: 141}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</a> <a href=\"#skills\" class=\"text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("skills", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 46, Col: 137}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</a> <a href=\"#contact\" class=\"text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var7 string
+		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("contact", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 47, Col: 139}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</a></div></nav><main class=\"container mx-auto px-4 py-16 space-y-20\"><section id=\"experience\" class=\"animate__animated animate__slideInUp\"><h2 class=\"text-4xl font-bold text-center mb-16 text-indigo-600 dark:text-pink-400\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var8 string
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("professional_experience", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 53, Col: 146}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</h2><div hx-get=\"/cv/experience\" hx-target=\"#experience-content\" hx-trigger=\"load\" id=\"experience-content\"><p class=\"text-center\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var9 string
+		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("loading_experience", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 55, Col: 81}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</p></div></section><section id=\"education\" class=\"animate__animated animate__slideInUp\"><h2 class=\"text-4xl font-bold text-center mb-16 text-indigo-600 dark:text-pink-400\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var10 string
+		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("education", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 60, Col: 132}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</h2><div hx-get=\"/cv/education\" hx-target=\"#education-content\" hx-trigger=\"load\" id=\"education-content\"><p class=\"text-center\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var11 string
+		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("loading_education", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 62, Col: 80}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "</p></div></section><section id=\"projects\" class=\"animate__animated animate__slideInUp\"><h2 class=\"text-4xl font-bold text-center mb-16 text-indigo-600 dark:text-pink-400\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var12 string
+		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("personal_projects", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 67, Col: 140}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "</h2><div hx-get=\"/cv/projects\" hx-target=\"#projects-content\" hx-trigger=\"load\" id=\"projects-content\"><p class=\"text-center\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var13 string
+		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("loading_projects", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 69, Col: 79}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "</p></div></section><section id=\"skills\" class=\"animate__animated animate__slideInUp\"><h2 class=\"text-4xl font-bold text-center mb-16 text-indigo-600 dark:text-pink-400\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var14 string
+		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("skills", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 74, Col: 129}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "</h2><input type=\"text\" placeholder=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var15 string
+		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("filter_skills", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 75, Col: 83}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "\" hx-get=\"/cv/skills\" hx-target=\"#skills-container\" hx-trigger=\"keyup\" name=\"q\" class=\"w-full p-4 border rounded-lg mb-6 bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300\"><div id=\"skills-container\" class=\"flex flex-wrap gap-4 justify-center\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		for _, skill := range data.Skills {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<span class=\"skill-tag animate__animated animate__fadeIn\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var2 string
-			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(skill)
+			var templ_7745c5c3_Var16 string
+			templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(skill)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 216, Col: 37}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 78, Col: 71}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "</span>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></div></div></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "</div></section><section id=\"contact\" class=\"animate__animated animate__slideInUp\"><h2 class=\"text-4xl font-bold text-center mb-16 text-indigo-600 dark:text-pink-400\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var17 string
+		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("contact_me", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 84, Col: 133}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "</h2><div hx-get=\"/contact\" hx-target=\"#contact-content\" hx-trigger=\"load\" id=\"contact-content\"><p class=\"text-center\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var18 string
+		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(GetTranslation("loading_contact", data.Language))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/index.templ`, Line: 86, Col: 78}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "</p></div></section></main><script>\n\t\t\tconst text = \"Wouter Beets\";\n\t\t\tlet i = 0;\n\t\t\tfunction typeWriter() {\n\t\t\t\tif (i < text.length) {\n\t\t\t\t\tdocument.getElementById(\"typing-effect\").innerHTML += text.charAt(i);\n\t\t\t\t\ti++;\n\t\t\t\t\tsetTimeout(typeWriter, 100);\n\t\t\t\t}\n\t\t\t}\n\t\t\ttypeWriter();\n\n\t\t\tfunction setLanguage(lang) {\n\t\t\t\tdocument.cookie = `language=${lang}; path=/; max-age=31536000`;\n\t\t\t\twindow.location.search = `lang=${lang}`;\n\t\t\t}\n\t\t</script></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
