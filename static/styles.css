@@ -7,20 +7,41 @@
 }
 
 .timeline-item {
-	@apply flex mb-12;
+	display: flex;
+	margin-bottom: 2rem;
+}
+
+.timeline-left {
+	width: 25%;
+	text-align: right;
+	position: relative;
+	padding-right: 20px;
+}
+
+.timeline-right {
+	width: 75%;
+	padding-left: 20px;
 }
 
 .timeline-dot {
-	@apply absolute left-4 w-4 h-4 bg-indigo-500 rounded-full z-10;
-}
-
-.timeline-content {
-	@apply bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg ml-8;
+	position: absolute;
+	right: -10px;
+	top: 10px;
+	width: 16px;
+	height: 16px;
+	background-color: #4F46E5;
+	border-radius: 50%;
+	z-index: 10;
 }
 
 .timeline::before {
 	content: '';
-	@apply absolute left-6 top-0 bottom-0 w-1 bg-indigo-500;
+	position: absolute;
+	left: 25%;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background-color: #4F46E5;
 }
 
 .details {
