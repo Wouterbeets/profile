@@ -38,15 +38,6 @@ templ IndexTemplate(data IndexData) {
 			</div>
 		</header>
 
-		<section class="bg-white dark:bg-gray-800 py-16">
-			<div class="container mx-auto px-4 text-center">
-				<h2 class="text-4xl font-bold text-indigo-600 dark:text-pink-400 mb-8">{ data.Profile.Title }</h2>
-				<p class="text-lg text-gray-700 dark:text-gray-200 max-w-4xl mx-auto">
-					{ data.Profile.Text }
-				</p>
-			</div>
-		</section>
-
 		<nav class="sticky top-0 bg-white dark:bg-gray-800 shadow-lg z-20">
 			<div class="container mx-auto px-4 py-4 flex justify-center space-x-8">
 				<a href="#experience" class="text-indigo-600 dark:text-pink-400 hover:text-pink-500 transition">{ GetTranslation("experience", data.Language) }</a>
