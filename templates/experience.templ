@@ -3,30 +3,47 @@ package templates
 import "fmt"
 
 templ ExperienceTemplate(data ExperienceData) {
-	<div class="timeline"> for i, item := range data.ExperienceItems {
-		<div class="timeline-item">
-			<div class="timeline-dot"></div>
-			<div class="timeline-content">
-				<div class="summary" hx-get={ fmt.Sprintf("/cv/experience/detail/%d", i) } hx-target={ fmt.Sprintf("#detail-%d", i) } hx-swap="innerHTML">
-					<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
-					<span class="company text-lg text-gray-600 dark:text-gray-300">{ item.Company }</span>
-					<span class="period text-sm text-gray-500">{ item.Period }</span>
-					<p class="expand-text text-indigo-500 cursor-pointer">Click to expand</p>
-				</div>
-				<div id={ fmt.Sprintf("detail-%d", i) } class="details">
-					<!-- Details will be loaded here -->
+	<div class="timeline">
+		for i, item := range data.ExperienceItems {
+			<div class="timeline-item">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<div class="summary"
+						hx-get={ fmt.Sprintf("/cv/experience/detail/%d", i) }
+						hx-target={ fmt.Sprintf("#detail-%d", i) }
+						hx-swap="innerHTML">
+						<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
+						<span class="company text-lg text-gray-600 dark:text-gray-300">{ item.Company }</span>
+						<span class="period text-sm text-gray-500">{ item.Period }</span>
+						<p class="expand-text text-indigo-500 cursor-pointer mt-4"
+						   hx-get={ fmt.Sprintf("/cv/experience/detail/%d", i) }
+						   hx-target={ fmt.Sprintf("#detail-%d", i) }
+						   hx-swap="innerHTML">
+						   Click to expand
+						</p>
+					</div>
+					<div id={ fmt.Sprintf("detail-%d", i) } class="details">
+						<!-- Details will be loaded here -->
+					</div>
 				</div>
 			</div>
-		</div>
-		if i < len(data.ExperienceItems)-1 {
-			<hr class="my-8 border-gray-300 dark:border-gray-600">
+			if i < len(data.ExperienceItems)-1 {
+				<hr class="my-8 border-gray-300 dark:border-gray-600"/>
+			}
 		}
-	} </div>
+	</div>
 }
 
 templ ExperienceDetailTemplate(item ExperienceItem, lang string, id int) {
-	<ul class="mt-4 space-y-2"> for _, desc := range item.Description {
-		<li class="text-gray-700 dark:text-gray-200">{ desc }</li>
-	} </ul>
-	<p class="collapse-text text-indigo-500 cursor-pointer mt-4" onclick={ templ.Script(fmt.Sprintf("document.getElementById('detail-%d').innerHTML = '';", id)) }>Click to collapse</p>
+	<ul class="mt-4 space-y-2">
+		for _, desc := range item.Description {
+			<li class="text-gray-700 dark:text-gray-200">{ desc }</li>
+		}
+	</ul>
+	<p class="collapse-text text-indigo-500 cursor-pointer mt-4"
+	   hx-get={ fmt.Sprintf("/cv/experience/collapse/%d", id) }
+	   hx-target={ fmt.Sprintf("#detail-%d", id) }
+	   hx-swap="innerHTML">
+	   Click to collapse
+	</p>
 }

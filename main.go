@@ -123,9 +123,9 @@ func main() {
 				"Dutch (Native)", "English (Fluent)", "French (Fluent)",
 				"AI Integration", "Privacy-Conscious AI", "Event Sourcing", "Domain-Driven Design",
 			},
-			Profile: loadProfileData(lang),
+			Profile:      loadProfileData(lang),
 			Translations: templates.Translations,
-			Language:    lang,
+			Language:     lang,
 		}
 		templates.IndexTemplate(data).Render(r.Context(), w)
 	})
@@ -159,6 +159,18 @@ func main() {
 		templates.ExperienceDetailTemplate(item, lang, id).Render(r.Context(), w)
 	})
 
+	// New: Handle experience collapse
+	router.Get("/cv/experience/collapse/{id}", func(w http.ResponseWriter, r *http.Request) {
+		idStr := chi.URLParam(r, "id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil || id < 0 {
+			http.Error(w, "Invalid ID", http.StatusBadRequest)
+			return
+		}
+		// Respond with empty content to collapse the section
+		w.Header().Set("Content-Type", "text/html")
+		w.Write([]byte(""))
+	})
 	// Handle education section
 	router.Get("/cv/education", func(w http.ResponseWriter, r *http.Request) {
 		lang := detectLanguage(r)
