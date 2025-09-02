@@ -161,16 +161,23 @@ func main() {
 
 	// New: Handle experience collapse
 	router.Get("/cv/experience/collapse/{id}", func(w http.ResponseWriter, r *http.Request) {
+		lang := detectLanguage(r)
 		idStr := chi.URLParam(r, "id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil || id < 0 {
 			http.Error(w, "Invalid ID", http.StatusBadRequest)
 			return
 		}
-		// Respond with empty content to collapse the section
 		w.Header().Set("Content-Type", "text/html")
-		w.Write([]byte(""))
+		data := loadExperienceData(lang)
+		if id >= len(data.ExperienceItems) {
+			http.Error(w, "ID out of range", http.StatusBadRequest)
+			return
+		}
+		item := data.ExperienceItems[id]
+		templates.ExperienceSummaryTemplate(item, id).Render(r.Context(), w)
 	})
+
 	// Handle education section
 	router.Get("/cv/education", func(w http.ResponseWriter, r *http.Request) {
 		lang := detectLanguage(r)
