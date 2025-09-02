@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"net/smtp"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -137,6 +138,25 @@ func main() {
 		data.Language = lang
 		data.Translations = templates.Translations
 		templates.ExperienceTemplate(data).Render(r.Context(), w)
+	})
+
+	// New: Handle experience detail
+	router.Get("/cv/experience/detail/{id}", func(w http.ResponseWriter, r *http.Request) {
+		lang := detectLanguage(r)
+		idStr := chi.URLParam(r, "id")
+		id, err := strconv.Atoi(idStr)
+		if err != nil || id < 0 {
+			http.Error(w, "Invalid ID", http.StatusBadRequest)
+			return
+		}
+		w.Header().Set("Content-Type", "text/html")
+		data := loadExperienceData(lang)
+		if id >= len(data.ExperienceItems) {
+			http.Error(w, "ID out of range", http.StatusBadRequest)
+			return
+		}
+		item := data.ExperienceItems[id]
+		templates.ExperienceDetailTemplate(item, lang).Render(r.Context(), w)
 	})
 
 	// Handle education section

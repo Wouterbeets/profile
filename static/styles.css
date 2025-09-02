@@ -10,17 +10,45 @@
 	@apply flex mb-12;
 }
 
+.timeline-dot {
+	@apply absolute left-4 w-4 h-4 bg-indigo-500 rounded-full z-10;
+}
+
 .timeline-content {
 	@apply bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg ml-8;
 }
 
 .timeline::before {
 	content: '';
-	@apply absolute left-4 top-0 bottom-0 w-1 bg-indigo-500;
+	@apply absolute left-6 top-0 bottom-0 w-1 bg-indigo-500;
+}
+
+.details {
+	@apply mt-4;
+}
+
+.expand-text {
+	@apply cursor-pointer;
+}
+
+.collapse-text {
+	@apply cursor-pointer;
+}
+
+.fade-in {
+	animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
 	.animate__animated {
+		animation: none !important;
+	}
+	.fade-in {
 		animation: none !important;
 	}
 }
