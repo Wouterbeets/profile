@@ -12,7 +12,7 @@
 	transition: background-color 0.3s;
 }
 
-.timeline-item:hover {
+.summary:hover .timeline-item {
 	background-color: rgba(79, 70, 229, 0.05);
 }
 
@@ -70,8 +70,8 @@
 	transition: opacity 0.3s;
 }
 
-.timeline-item:hover .expand-text,
-.timeline-item:hover .collapse-text {
+.summary:hover .expand-text,
+.summary:hover .collapse-text {
 	opacity: 1;
 }
 

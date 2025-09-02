@@ -5,15 +5,15 @@ import "fmt"
 templ ExperienceTemplate(data ExperienceData) {
 	<div class="timeline">
 		for i, item := range data.ExperienceItems {
-			<div class="timeline-item" hx-get={ fmt.Sprintf("/cv/experience/detail/%d", i) } hx-target={ fmt.Sprintf("#summary-%d", i) } hx-swap="innerHTML">
-				<div class="timeline-left">
-					<span class="year text-sm text-gray-500">{ item.Period }</span>
-					<div class="timeline-dot"></div>
-				</div>
-				<div class="timeline-right">
-					<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
-					<span class="company text-lg text-gray-600 dark:text-gray-300">{ item.Company }</span>
-					<div class="summary" id={ fmt.Sprintf("summary-%d", i) }>
+			<div class="summary" id={ fmt.Sprintf("summary-%d", i) } hx-get={ fmt.Sprintf("/cv/experience/detail/%d", i) } hx-target={ fmt.Sprintf("#summary-%d", i) } hx-swap="innerHTML">
+				<div class="timeline-item">
+					<div class="timeline-left">
+						<span class="year text-sm text-gray-500">{ item.Period }</span>
+						<div class="timeline-dot"></div>
+					</div>
+					<div class="timeline-right">
+						<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
+						<span class="company text-lg text-gray-600 dark:text-gray-300">{ item.Company }</span>
 						<p class="expand-text text-indigo-500 mt-4 opacity-0 transition-opacity duration-300">
 						   Click to expand
 						</p>
@@ -25,20 +25,42 @@ templ ExperienceTemplate(data ExperienceData) {
 }
 
 templ ExperienceDetailTemplate(item ExperienceItem, lang string, id int) {
-	<div class="cursor-pointer" hx-get={ fmt.Sprintf("/cv/experience/collapse/%d", id) } hx-target={ fmt.Sprintf("#summary-%d", id) } hx-swap="innerHTML">
-		<ul class="mt-4 space-y-2">
-			for _, desc := range item.Description {
-				<li class="text-gray-700 dark:text-gray-200">{ desc }</li>
-			}
-		</ul>
-		<p class="collapse-text text-indigo-500 mt-4 opacity-0 transition-opacity duration-300">
-		   Click to collapse
-		</p>
+	<div class="summary" id={ fmt.Sprintf("summary-%d", id) } hx-get={ fmt.Sprintf("/cv/experience/collapse/%d", id) } hx-target={ fmt.Sprintf("#summary-%d", id) } hx-swap="innerHTML">
+		<div class="timeline-item">
+			<div class="timeline-left">
+				<span class="year text-sm text-gray-500">{ item.Period }</span>
+				<div class="timeline-dot"></div>
+			</div>
+			<div class="timeline-right">
+				<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
+				<span class="company text-lg text-gray-600 dark:text-gray-300">{ item.Company }</span>
+				<ul class="mt-4 space-y-2">
+					for _, desc := range item.Description {
+						<li class="text-gray-700 dark:text-gray-200">{ desc }</li>
+					}
+				</ul>
+				<p class="collapse-text text-indigo-500 mt-4 opacity-0 transition-opacity duration-300">
+				   Click to collapse
+				</p>
+			</div>
+		</div>
 	</div>
 }
 
 templ ExperienceSummaryTemplate(item ExperienceItem, i int) {
-	<p class="expand-text text-indigo-500 mt-4 opacity-0 transition-opacity duration-300">
-	   Click to expand
-	</p>
+	<div class="summary" id={ fmt.Sprintf("summary-%d", i) } hx-get={ fmt.Sprintf("/cv/experience/detail/%d", i) } hx-target={ fmt.Sprintf("#summary-%d", i) } hx-swap="innerHTML">
+		<div class="timeline-item">
+			<div class="timeline-left">
+				<span class="year text-sm text-gray-500">{ item.Period }</span>
+				<div class="timeline-dot"></div>
+			</div>
+			<div class="timeline-right">
+				<h3 class="text-2xl font-bold text-indigo-600 dark:text-pink-400">{ item.Title }</h3>
+				<span class="company text-lg text-gray-600 dark:text-gray-300">{ item.Company }</span>
+				<p class="expand-text text-indigo-500 mt-4 opacity-0 transition-opacity duration-300">
+				   Click to expand
+				</p>
+			</div>
+		</div>
+	</div>
 }
