@@ -13,7 +13,7 @@ templ ExperienceTemplate(data ExperienceData) {
 					<span class="period text-sm text-gray-500">{ item.Period }</span>
 					<p class="expand-text text-indigo-500 cursor-pointer">Click to expand</p>
 				</div>
-				<div id={ fmt.Sprintf("detail-%d", i) } class="details hidden">
+				<div id={ fmt.Sprintf("detail-%d", i) } class="details">
 					<!-- Details will be loaded here -->
 				</div>
 			</div>
@@ -28,6 +28,5 @@ templ ExperienceDetailTemplate(item ExperienceItem, lang string, id int) {
 	<ul class="mt-4 space-y-2"> for _, desc := range item.Description {
 		<li class="text-gray-700 dark:text-gray-200">{ desc }</li>
 	} </ul>
-	<p class="collapse-text text-indigo-500 cursor-pointer mt-4" onclick="this.parentElement.classList.add('hidden')">Click to collapse</p>
-	<script>document.getElementById('detail-{ id }').classList.remove('hidden');</script>
+	<p class="collapse-text text-indigo-500 cursor-pointer mt-4" onclick={ fmt.Sprintf("document.getElementById('detail-%d').innerHTML = '';", id) }>Click to collapse</p>
 }
