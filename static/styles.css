@@ -44,6 +44,18 @@
 	background-color: #4F46E5;
 }
 
+.education-list {
+	@apply space-y-8;
+}
+
+.education-item {
+	@apply mb-8;
+}
+
+.education-content {
+	@apply p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md;
+}
+
 .details {
 	@apply mt-4;
 }
