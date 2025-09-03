@@ -11,9 +11,9 @@
 			"GitHubLink": "https://github.com/Wouterbeets/chat-app"
 		},
 		{
-			"Title": "Outil d'Analyse de Données",
-			"Description": "Un outil pour l'analyse de big data construit avec Python et React, avec des tableaux de bord interactifs.",
-			"GitHubLink": "https://github.com/Wouterbeets/analytics-tool"
+			"Title": "Bibliothèque de Réseaux Neuronaux avec Algorithmes Génétiques",
+			"Description": "Une bibliothèque de réseaux neuronaux basée sur Go, mettant en œuvre des algorithmes génétiques pour entraîner les réseaux, démontrée avec un exemple de jeu Snake.",
+			"GitHubLink": "https://github.com/Wouterbeets/net"
 		},
 		{
 			"Title": "Assistant IA MindPalace",
