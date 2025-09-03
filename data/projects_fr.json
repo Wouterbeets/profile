@@ -6,11 +6,6 @@
 			"GitHubLink": "https://github.com/Wouterbeets/profile"
 		},
 		{
-			"Title": "Application de Chat Microservices",
-			"Description": "Une application de chat en temps réel utilisant l'architecture de microservices avec Go, Docker et Kubernetes.",
-			"GitHubLink": "https://github.com/Wouterbeets/chat-app"
-		},
-		{
 			"Title": "Bibliothèque de Réseaux Neuronaux avec Algorithmes Génétiques",
 			"Description": "Une bibliothèque de réseaux neuronaux basée sur Go, mettant en œuvre des algorithmes génétiques pour entraîner les réseaux, démontrée avec un exemple de jeu Snake.",
 			"GitHubLink": "https://github.com/Wouterbeets/net"
