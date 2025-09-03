@@ -13,7 +13,7 @@
 		{
 			"Title": "Assistant IA MindPalace",
 			"Description": "Développé un assistant IA de bureau en Go utilisant l'approvisionnement d'événements, intégrant la transcription audio en temps réel (PortAudio, Python), les interactions LLM (API Ollama avec 131k contextes de jetons), et une interface graphique basée sur Fyne avec des thèmes personnalisés et des tableaux Kanban. Implémenté une architecture de plugin pour l'extensibilité, avec un plugin de gestionnaire de tâches prenant en charge les opérations CRUD de tâches.",
-			"GitHubLink": "https://github.com/Wouterbeets/mindpalace"
+			"GitHubLink": "https://github.com/Wouterbeets/mindpalace/tree/master"
 		}
 	]
 }
